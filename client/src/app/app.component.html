@@ -3,5 +3,13 @@
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
 <!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
 
-<h1>Hello</h1>
-<router-outlet />
+<div class="flex">
+    <app-sidebar />
+    <div class="flex-1">
+        <app-header />
+        <div class="p-6">
+            <h1>Hello dashboard</h1>
+            <router-outlet />
+        </div>
+    </div>
+</div>

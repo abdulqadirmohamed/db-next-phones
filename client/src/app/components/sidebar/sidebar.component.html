@@ -1,0 +1,53 @@
+<div class="flex flex-col w-64 h-screen md:w-80 lg:w-64 border-r-2">
+  <nav class="px-6 my-4">
+    <h1 class="font-semibold text-xl">Next Phones</h1>
+    <div class="flex flex-col justify-between h-[700px]">
+      <ul class="mt-14 text-gray-700">
+        <li class="my-2">
+          <a routerLink="/" routerLinkActive="bg-blue-700 text-white" [routerLinkActiveOptions]="{ exact: true }"
+            class="text-[16px] flex items-center gap-2 py-2 px-4 group hover:bg-gray-100 rounded">
+            <lucide-icon name="layout-dashboard" [size]="20" class="group-hover:text-blue-700"
+              routerLinkActive="group-hover:text-white"></lucide-icon>
+            Dashboard
+          </a>
+        </li>
+        <li class="my-2">
+          <a routerLink="/products"
+            class="text-[16px] flex items-center gap-2 py-2 px-4 group hover:bg-gray-100 rounded">
+            <lucide-icon name="shopping-bag" [size]="20" class="group-hover:text-blue-700"></lucide-icon>
+            Products
+          </a>
+        </li>
+        <li class="my-2">
+          <a routerLink="/sales" class="text-[16px] flex items-center gap-2 py-2 px-4 group hover:bg-gray-100 rounded">
+            <lucide-icon name="scan-line" [size]="20" class="group-hover:text-blue-700"></lucide-icon>
+            Sales
+          </a>
+        </li>
+        <li class="my-2">
+          <a routerLink="/customers"
+            class="text-[16px] flex items-center gap-2 py-2 px-4 group hover:bg-gray-100 rounded">
+            <lucide-icon name="users" [size]="20" class="group-hover:text-blue-700"></lucide-icon>
+            Customers
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li class="my-2">
+          <a routerLink="/customers"
+            class="text-[16px] flex items-center gap-2 py-2 px-4 group hover:bg-gray-100 rounded">
+            <lucide-icon name="settings" [size]="20" class="group-hover:text-blue-700"></lucide-icon>
+            Setting
+          </a>
+        </li>
+        <li class="my-2">
+          <a routerLink="/customers"
+            class="text-[16px] flex items-center gap-2 py-2 px-4 group hover:bg-gray-100 rounded">
+            <lucide-icon name="log-out" [size]="20" class="group-hover:text-blue-700"></lucide-icon>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
