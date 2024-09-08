@@ -1,15 +1,46 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 
 import { routes } from './app.routes';
 
-import { Bell, Search, ShoppingBag, Users, ScanLine, Settings, LogOut, LayoutDashboard, LucideAngularModule, TrendingUp } from "lucide-angular";
+
+import {
+  Bell,
+  Search,
+  ShoppingBag,
+  Users,
+  ScanLine,
+  Settings,
+  LogOut,
+  LayoutDashboard,
+  LucideAngularModule,
+  TrendingUp,
+  CircleDollarSign,
+} from 'lucide-angular';
+
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-
-  importProvidersFrom(LucideAngularModule.pick({ Bell, Search, LayoutDashboard, ShoppingBag, Users, ScanLine, Settings, LogOut, TrendingUp }))
-  ]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    importProvidersFrom(
+      LucideAngularModule.pick({
+        Bell,
+        Search,
+        LayoutDashboard,
+        ShoppingBag,
+        Users,
+        ScanLine,
+        Settings,
+        LogOut,
+        TrendingUp,
+        CircleDollarSign,
+      })
+    )
+  ],
 };
