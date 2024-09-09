@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors');
 const productRouter = require('./routes/product.routes')
 const customerRouter = require('./routes/customer.routes')
 const salesRouter = require('./routes/sales.routes')
@@ -10,6 +11,10 @@ const app = express()
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+
+app.use(cors({
+    origin: '*'
+}));
 
 app.use('/api/products', productRouter);
 app.use('/api/customers', customerRouter);
