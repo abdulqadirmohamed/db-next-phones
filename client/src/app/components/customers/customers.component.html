@@ -7,7 +7,7 @@
 Create Customer</button>
 
 
-        <app-drawer [isOpen]="isCustomerDrawerOpen" (onClose)="closeCustomerDrawer()">
+        <app-drawer [isOpen]="isCustomerDrawerOpen" [title]="'Create Customer'" (onClose)="closeCustomerDrawer()">
             <app-customer-form/>
         </app-drawer>
         

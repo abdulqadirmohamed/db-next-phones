@@ -2,8 +2,8 @@
 <div class="flex justify-between items-center">
     <button (click)="openProductDrawer()" class="bg-blue-700 text-white px-3 py-2 rounded-md my-4 text-sm flex items-center gap-2">
         <lucide-icon name="plus"></lucide-icon>
-Create Customer</button>
-    <app-drawer [isOpen]="isProductDrawerOpen" (onClose)="closeProductDrawer()">
+Create Product</button>
+    <app-drawer [isOpen]="isProductDrawerOpen" [title]="'Create Product'" (onClose)="closeProductDrawer()">
         <app-product-form/>
     </app-drawer>
     
