@@ -1,1 +1,11 @@
-<p>sales works!</p>
+<p>sales</p>
+<ag-grid-angular 
+[rowData]="itemList" 
+[columnDefs]="colDefs" 
+[defaultColDef]="defaultColDef" 
+[rowSelection]="rowSelection"
+[pagination]="true"
+[paginationPageSize] = "paginationPageSize"
+
+style="height: 500px;"
+    class="ag-theme-quartz" />

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { IncomeExpenseChartComponent } from "../../charts/income-expense-chart/income-expense-chart.component";
 import { CustomersService } from '../../services/customers/customers.service';
-import { SalesService } from '../../services/sales.service';
+import { SalesService } from '../../services/sales/sales.service';
 
 @Component({
   selector: 'app-dashboard',

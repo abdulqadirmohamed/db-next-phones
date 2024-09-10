@@ -3,7 +3,8 @@ const { pool } = require("../models/db");
 const salesController = {
     getAll: async (req, res) => {
         try {
-            const [rows] = await pool.query("SELECT * FROM sales");
+            //customers.name AS customer_name, products.name AS product_name, sales.quantity, sales.total_amount, sales.sale_date
+            const [rows] = await pool.query("Select customers.name AS customer_name, products.name AS product_name, sales.quantity, sales.total_amount, sales.sale_date FROM sales JOIN customers JOIN products WHERE sales.customer_id = customers.id AND sales.product_id = products.id");
             res.json({
                 data: rows
             });
@@ -72,9 +73,10 @@ const salesController = {
 
     totalSales: async (req, res) => {
         try {
-            const [rows] = await pool.query("SELECT COUNT(*) AS total FROM sales");
+            const [rows] = await pool.query("SELECT SUM(total_amount) AS total FROM sales;");
+            const totalSales = rows[0].total
             res.json({
-                totalSales: rows[0].total
+                totalSales: totalSales
             })
         } catch (error) {
             console.log(error);

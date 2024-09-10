@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Sales } from '../../model/sales';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class SalesService {
 
   constructor(private http: HttpClient) { }
 
-  // getAllItems(): Observable<Customers[]> {
-  //   return this.http.get<Customers[]>(`${this.apiUrl}/sales`);
-  // }
+  getAllISales(): Observable<Sales[]> {
+    return this.http.get<Sales[]>(`${this.apiUrl}/sales`);
+  }
 
   // createCustomer(customerData: Customers): Observable<Customers> {
   //   return this.http.post<Customers>(`${this.apiUrl}/sales`, customerData);
