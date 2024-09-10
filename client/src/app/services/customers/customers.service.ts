@@ -13,7 +13,12 @@ export class CustomersService {
 
   constructor(private http: HttpClient) { }
 
-  getAllItems(): Observable<{ data: Customers[] }> {
-    return this.http.get<{ data: Customers[] }>(`${this.apiUrl}/customers`);
+  getAllItems(): Observable<Customers[]> {
+    return this.http.get<Customers[]>(`${this.apiUrl}/customers`);
+  }
+
+  // Function to send form data to backend
+  createCustomer(customerData: Customers): Observable<Customers> {
+    return this.http.post<Customers>(`${this.apiUrl}/customers`, customerData);
   }
 }

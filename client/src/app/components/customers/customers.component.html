@@ -1,11 +1,21 @@
-<p>customers works!</p>
-<button (click)="openDrawer()" class="bg-green-500 text-white px-4 py-2 rounded-md">Add Customer</button>
-<app-drawer [isOpen]="isDrawerOpen" (onClose)="closeDrawer()"></app-drawer>
 
-<button (click)="onBtExport()" class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
-    Export to Excel
-</button>
-<ag-grid-angular 
+<div>
+    <p>Customers</p>
+    <div class="flex justify-between items-center">
+        <button (click)="openCustomerDrawer()" class="bg-blue-700 text-white px-3 py-2 rounded-md my-4 text-sm flex items-center gap-2">
+            <lucide-icon name="plus"></lucide-icon>
+Create Customer</button>
+
+
+        <app-drawer [isOpen]="isCustomerDrawerOpen" (onClose)="closeCustomerDrawer()">
+            <app-customer-form/>
+        </app-drawer>
+        
+        <button (click)="onBtExport()" class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
+            Export to Excel
+        </button>
+    </div>
+    <ag-grid-angular 
 [rowData]="itemList" 
 [columnDefs]="colDefs" 
 [defaultColDef]="defaultColDef" 
@@ -16,3 +26,4 @@
 (gridReady)="onGridReady($event)"
 style="height: 500px;"
     class="ag-theme-quartz" />
+</div>

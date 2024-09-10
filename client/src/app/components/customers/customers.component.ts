@@ -6,11 +6,13 @@ import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community'
 import { Customers } from '../../model/customers';
 import { CustomersService } from '../../services/customers/customers.service';
 import { DrawerComponent } from "../drawer/drawer.component";
+import { LucideAngularModule } from 'lucide-angular';
+import { CustomerFormComponent } from "../customer-form/customer-form.component";
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [AgGridAngular, DrawerComponent],
+  imports: [AgGridAngular, DrawerComponent, LucideAngularModule, CustomerFormComponent],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
@@ -57,14 +59,13 @@ export class CustomersComponent implements OnInit {
   }
 
 
-  // Customer drawer
-  isDrawerOpen = false;
+  isCustomerDrawerOpen = false;
 
-  openDrawer() {
-    this.isDrawerOpen = true;
+  openCustomerDrawer() {
+    this.isCustomerDrawerOpen = true;
   }
 
-  closeDrawer() {
-    this.isDrawerOpen = false;
+  closeCustomerDrawer() {
+    this.isCustomerDrawerOpen = false;
   }
 }

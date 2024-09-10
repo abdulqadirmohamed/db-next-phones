@@ -6,7 +6,7 @@ const pool = mysql.createPool({
     password: '',
     database: 'nextphones',
     
-    port: 5222,
+    port: 3306,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0

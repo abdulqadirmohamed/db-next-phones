@@ -21,6 +21,7 @@ import {
   LucideAngularModule,
   TrendingUp,
   CircleDollarSign,
+  Plus
 } from 'lucide-angular';
 
 
@@ -42,6 +43,7 @@ export const appConfig: ApplicationConfig = {
         LogOut,
         TrendingUp,
         CircleDollarSign,
+        Plus
       })
     )
   ],
