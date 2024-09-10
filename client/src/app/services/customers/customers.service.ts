@@ -17,8 +17,11 @@ export class CustomersService {
     return this.http.get<Customers[]>(`${this.apiUrl}/customers`);
   }
 
-  // Function to send form data to backend
   createCustomer(customerData: Customers): Observable<Customers> {
     return this.http.post<Customers>(`${this.apiUrl}/customers`, customerData);
+  }
+
+  getTotalCustomers(): Observable<{totalCustomers: number}>{
+    return this.http.get<{totalCustomers:number}>(`${this.apiUrl}/customers/total`)
   }
 }

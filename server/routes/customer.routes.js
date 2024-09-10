@@ -5,10 +5,12 @@ const router = express.Router()
 
 
 router.get('/', customerController.getAll)
+router.get('/total', customerController.totalCustomers)
 router.get('/:id', customerController.getProductById)
 router.post('/', customerController.create)
 router.post('/:id', customerController.update)
 router.delete('/:id', customerController.destroy)
+
 
 
 module.exports = router;

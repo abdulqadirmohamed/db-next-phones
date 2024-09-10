@@ -68,7 +68,25 @@ const customerController = {
                 status: "error"
             })
         }
+    },
+    
+    totalCustomers: async (req, res) => {
+        try {
+            const [rows] = await pool.query("SELECT COUNT(*) AS total FROM customers");
+            res.json({
+                totalCustomers: rows[0].total
+            })
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+            status: "error",
+            message: "Database query failed"
+        });
+        }
     }
+
+
 };
 
 module.exports = customerController;

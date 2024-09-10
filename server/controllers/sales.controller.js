@@ -68,7 +68,39 @@ const salesController = {
                 status: "error"
             })
         }
-    }
+    },
+
+    totalSales: async (req, res) => {
+        try {
+            const [rows] = await pool.query("SELECT COUNT(*) AS total FROM sales");
+            res.json({
+                totalSales: rows[0].total
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+            status: "error",
+            message: "Database query failed"
+        });
+        }
+    },
+    totalSalesToday : async (req, res) => {
+        try {
+            const [rows] = await pool.query("SELECT SUM(total_amount) AS total_sales_today FROM sales WHERE DATE(sale_date) = CURDATE()");
+
+            const totalSalesToday = rows[0].total_sales_today || 0;
+            res.json({
+                total_sales_today: totalSalesToday
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+            status: "error",
+            message: "Database query failed"
+        });
+        }
+    },
+
 }
 
 module.exports = salesController

@@ -4,6 +4,10 @@ const salesController = require('../controllers/sales.controller');
 const router = express.Router()
 
 router.get('/', salesController.getAll)
+
+router.get('/total', salesController.totalSales)
+router.get('/todaysales', salesController.totalSalesToday)
+
 router.get('/:id', salesController.getSaleById)
 
 router.post('/', salesController.create)
