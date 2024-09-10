@@ -1,1 +1,18 @@
 <p>customers works!</p>
+<button (click)="openDrawer()" class="bg-green-500 text-white px-4 py-2 rounded-md">Add Customer</button>
+<app-drawer [isOpen]="isDrawerOpen" (onClose)="closeDrawer()"></app-drawer>
+
+<button (click)="onBtExport()" class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
+    Export to Excel
+</button>
+<ag-grid-angular 
+[rowData]="itemList" 
+[columnDefs]="colDefs" 
+[defaultColDef]="defaultColDef" 
+[rowSelection]="rowSelection"
+[pagination]="true"
+[paginationPageSize] = "paginationPageSize"
+
+(gridReady)="onGridReady($event)"
+style="height: 500px;"
+    class="ag-theme-quartz" />

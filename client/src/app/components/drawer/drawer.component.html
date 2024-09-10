@@ -1,0 +1,12 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 z-40" *ngIf="isOpen" (click)="closeDrawer()"></div>
+
+<div class="fixed top-0 right-0 h-full bg-white w-64 shadow-lg z-50 transform transition-transform duration-300"
+    [ngClass]="{'translate-x-0': isOpen, 'translate-x-full': !isOpen}">
+  <div class="p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">Add Customer</h2>
+    <button (click)="closeDrawer()">✕</button>
+  </div>
+  <div class="p-4">
+    <app-customer-form/>
+  </div>
+</div>

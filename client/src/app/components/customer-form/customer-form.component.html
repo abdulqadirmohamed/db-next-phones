@@ -1,0 +1,19 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="customerForm" class="space-y-4">
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+      <input id="name" formControlName="name" type="text" class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+  
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+      <input id="email" formControlName="email" type="email" class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+  
+    <div>
+      <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+      <input id="phone" formControlName="phone" type="tel" class="mt-1 block w-full border border-gray-300 p-2 rounded-md shadow-sm">
+    </div>
+  
+    <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md">Submit</button>
+  </form>
+  
