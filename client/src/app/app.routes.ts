@@ -1,29 +1,31 @@
 import { Routes } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { SalesComponent } from './components/sales/sales.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
+        path: 'login',
+        component: AuthLayoutComponent,
+        children: [
+          { path: '', component: LoginComponent }
+        ]
+      },
+      {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-    },
-    {
-        path: '',
-        component: DashboardComponent
-    }, 
-    {
-        path: 'products',
-        component: ProductsComponent
-    }, 
-    {
-        path: 'customers',
-        component: CustomersComponent
-    },
-    {
-        path: 'sales',
-        component: SalesComponent
-    }
+        component: DefaultLayoutComponent,
+        children: [
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'product', component: ProductsComponent },
+          { path: 'customer', component: CustomersComponent },
+          { path: 'sales', component: SalesComponent },
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+        ]
+      },
+      { path: '**', redirectTo: 'dashboard' },
 ];
