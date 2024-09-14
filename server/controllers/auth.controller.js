@@ -51,13 +51,15 @@ const authController = {
             const check = await bcrypt.compare(password, hash)
 
             if (check) {
-                const accessToken = jwt.sign({ userId: id }, '3812932sjad34&*@', { expiresIn: '1h' });
+                const token = jwt.sign({ userId: id }, '3812932sjad34&*@', { expiresIn: '1h' });
                 return res.json({
-                    accessToken,
-                    data: {
-                        name,
-                        email
-                    }
+                    token,
+                    success: true,
+                    message: "login successfully",
+                    // data: {
+                    //     name,
+                    //     email
+                    // }
                 })
             }
             return res.json({ error: "Wrong password!" })

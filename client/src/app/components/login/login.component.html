@@ -5,13 +5,14 @@
                 <h1 class="text-3xl font-medium text-gray-700">Welcome back</h1>
                 <p class="text-sm text-gray-500">Please enter your login details</p>
                 <form action="" (ngSubmit)="onSubmit()" class="text-gray-600 w-[400px] my-8">
+                    <p class="text-red-700 text-sm">{{errorMessage}}</p>
                     <div class="my-3">
                         <label for="email">Email</label>
-                        <input type="email" name="email" [(ngModel)]="loginObj.email"  placeholder="Enter your email" required class="w-full px-4 py-2 border rounded-md my-1">
+                        <input type="email" name="email" [(ngModel)]="credentials.email"  placeholder="Enter your email" required class="w-full px-4 py-2 border rounded-md my-1">
                     </div>
                     <div class="my-3">
                         <label for="password">Password</label>
-                        <input type="password" name="password" [(ngModel)]="loginObj.password" placeholder="Enter your email" required class="w-full px-4 py-2 border rounded-md my-1">
+                        <input type="password" name="password" [(ngModel)]="credentials.password" placeholder="Enter your email" required class="w-full px-4 py-2 border rounded-md my-1">
                     </div>
                     <div class="text-[13px] flex justify-between my-3">
                         <span class="flex items-center gap-2">
