@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  font-family: 'poppins','Open Sans',sans-serif
+}
+
 .circle-clip {
     @apply  rounded-full;
     clip-path: inset(50% 0 0 0); /* Dhinaca midig ayaa laga jari doonaa 50% */
