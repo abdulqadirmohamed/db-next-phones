@@ -1,36 +1,35 @@
-import { CommonModule, NgClass } from '@angular/common';
-import { Component} from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, inject} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgClass],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  isLoginMode = false;
-
-  email: string = '';
-  password: string = '';
-
-  authForm: FormGroup;
-
-  constructor(private fb:FormBuilder){
-    this.authForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.min(6)]]
-    });
+ 
+  loginObj:any = {
+    "email":"",
+    "password":""
   }
 
-  onSwitchMode(){
-    this.isLoginMode = !this.isLoginMode
-  }
+  router = inject(Router)
+  constructor(private authService : AuthService){}
 
   onSubmit(){
-    console.log(this.authForm.value)
-    this.authForm.reset()
+    this.authService.onLogin(this.loginObj).subscribe((res:any)=>{
+      if(res.result && res.result.token){
+        localStorage.setItem('token', res.result.token)
+        this.router.navigateByUrl('dashboard')
+      }else{
+        alert('wrong credentials')
+      }
+    })
   }
 }
