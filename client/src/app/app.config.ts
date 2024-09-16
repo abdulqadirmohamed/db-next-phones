@@ -30,12 +30,7 @@ import { authInterceptor } from './interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useValue: authInterceptor, // Your functional interceptor
-      multi: true, // This ensures Angular can support multiple interceptors
-    },
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
 
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
