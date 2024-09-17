@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit{
   }
    // Logout function
    onLogout() {
-    this.authService.logout(); // Call the logout function from authService
+    this.authService.logout(); 
+    window.location.reload()
   }
 }

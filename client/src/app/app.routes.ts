@@ -7,6 +7,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { SalesComponent } from './components/sales/sales.component';
+import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -18,7 +19,7 @@ export const routes: Routes = [
       },
       {
         path: '',
-        component: DefaultLayoutComponent,
+        component: DefaultLayoutComponent, canActivate:[authGuard],
         children: [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'product', component: ProductsComponent },

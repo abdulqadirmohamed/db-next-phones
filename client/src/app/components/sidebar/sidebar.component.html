@@ -42,11 +42,11 @@
           </a>
         </li>
         <li class="my-2">
-          <a routerLink="#" (click)="onLogout()" 
-            class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
+          <button (click)="onLogout()" 
+            class="text-[16px] flex items-center gap-3 py-3 px-4 group">
             <lucide-icon name="log-out" [size]="20" class="group-hover:text-blue-700 ml-2"></lucide-icon>
             Logout
-          </a>
+        </button>
         </li>
       </ul>
     </div>
