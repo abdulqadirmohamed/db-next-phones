@@ -26,6 +26,9 @@ export class LoginComponent {
     this.authService.onLogin(this.loginObj).subscribe((res:any)=>{
       if(res.result && res.result.token){
         localStorage.setItem('token', res.result.token)
+        localStorage.setItem('email', res.result.email)
+        localStorage.setItem('name', res.result.name)
+
         this.router.navigateByUrl('dashboard')
       }else{
         alert('wrong credentials')

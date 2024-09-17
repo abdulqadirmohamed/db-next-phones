@@ -21,6 +21,7 @@ module.exports = {
     } else {
       return res.json({
         success: 0,
+        status: 401,
         message: "Access Denied! Unauthorized User",
       });
     }

@@ -10,5 +10,6 @@ router.post("/sign-in", authController.signIn);
 
 
 router.get("/users", checkToken, authController.getAll);
+router.get("/users/:id", checkToken, authController.getUserById);
 
 module.exports = router;

@@ -53,13 +53,13 @@ const authController = {
             if (check) {
                 const token = jwt.sign({ userId: id }, '3812932sjad34&*@', { expiresIn: '1h' });
                 return res.json({
-                    token,
-                    success: true,
-                    message: "login successfully",
-                    // data: {
-                    //     name,
-                    //     email
-                    // }
+                    result:{
+                        name,
+                        email,
+                        token,
+                        success: true,
+                        message: "login successfully",
+                    }
                 })
             }
             return res.json({ error: "Wrong password!" })
@@ -84,6 +84,22 @@ const authController = {
             res.json({
                 status: "error"
             })
+        }
+    },
+
+    getUserById: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+            res.json({
+                data: rows
+            });
+        } catch (error) {
+            console.error('Error fetching user:', error);
+            res.status(500).json({
+                status: "error",
+                message: "An error occurred while fetching users."
+            });
         }
     },
 

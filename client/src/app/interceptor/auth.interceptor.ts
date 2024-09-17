@@ -4,7 +4,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   
    // Retrieve the token from localStorage
    const token = localStorage.getItem('token');
-   console.log('Retrieved Token:', token); // Debugging token retrieval
+   //console.log('Retrieved Token:', token); // Debugging token retrieval
  
    // If the token is available, clone the request and set the Authorization header
    if (token) {
