@@ -21,4 +21,8 @@ export class ProductService {
   createProduct(productData: Product):Observable<Product>{
     return this.http.post<Product>(`${this.apiUrl}/products`, productData)
   }
+
+  getTotalProducts(): Observable<{totalProducts: number}>{
+    return this.http.get<{totalProducts:number}>(`${this.apiUrl}/products/total`)
+  }
 }

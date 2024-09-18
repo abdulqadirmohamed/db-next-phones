@@ -67,6 +67,19 @@ const productController = {
                 status: "error"
             })
         }
+    },
+    totalProducts: async (req, res) => {
+        try {
+            const [rows] = await pool.query("SELECT COUNT(*) AS total FROM products")
+            res.json({
+                totalProducts: rows[0].total
+            })
+        } catch (error) {
+            res.status(500).json({
+                status: "error",
+                message: "Database query failed"
+            })
+        }
     }
 };
 

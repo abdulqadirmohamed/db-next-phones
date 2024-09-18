@@ -22,16 +22,18 @@ import {
   LucideAngularModule,
   TrendingUp,
   CircleDollarSign,
-  Plus
+  Plus,
+  Package2
 } from 'lucide-angular';
 import { authInterceptor } from './interceptor/auth.interceptor';
+import { AgGridModule } from 'ag-grid-angular';
+import { CustomButtonComponentComponent } from './components/custom-button-component/custom-button-component.component';
 
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
-
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(
@@ -46,7 +48,8 @@ export const appConfig: ApplicationConfig = {
         LogOut,
         TrendingUp,
         CircleDollarSign,
-        Plus
+        Plus,
+        Package2
       })
     )
   ],

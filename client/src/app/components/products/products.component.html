@@ -18,7 +18,9 @@ Create Product</button>
 [rowSelection]="rowSelection"
 [pagination]="true"
 [paginationPageSize] = "paginationPageSize"
+(rowClicked)="onRowClicked($event)"
+
 
 (gridReady)="onGridReady($event)"
 style="height: 500px;"
-    class="ag-theme-quartz" />
+    class="ag-theme-quartz capitalize" />

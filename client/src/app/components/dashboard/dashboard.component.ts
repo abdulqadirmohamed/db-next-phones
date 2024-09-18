@@ -4,6 +4,7 @@ import { IncomeExpenseChartComponent } from "../../charts/income-expense-chart/i
 import { CustomersService } from '../../services/customers/customers.service';
 import { SalesService } from '../../services/sales/sales.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { ProductService } from '../../services/product/product.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,12 +17,15 @@ export class DashboardComponent implements OnInit{
 
   usersList:any[] = []
 
+  totalProducts: number = 0
   totalCustomers: number = 0;
   totalSales: number = 0;
-  totalTodaySales: number = 0
+  totalTodaySales: number = 0;
 
   customerServices = inject(CustomersService)
   salesServices = inject(SalesService)
+  productServices = inject(ProductService)
+
   authService = inject(AuthService)
 
   ngOnInit(): void {
@@ -29,6 +33,10 @@ export class DashboardComponent implements OnInit{
     this.authService.getAllUsers().subscribe((res:any)=> {
       this.usersList = res.result
     })
+
+    this.productServices.getTotalProducts().subscribe(data => {
+      this.totalProducts = data.totalProducts;
+    });
 
     this.customerServices.getTotalCustomers().subscribe(data => {
       this.totalCustomers = data.totalCustomers;

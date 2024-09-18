@@ -4,10 +4,11 @@ import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../model/product';
 
 // import { ColDef } from '@ag-grid-community/core';
-import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, GridApi, GridReadyEvent, RowClickedEvent } from 'ag-grid-community';
 import { LucideAngularModule } from 'lucide-angular';
 import { DrawerComponent } from '../drawer/drawer.component';
 import { ProductFormComponent } from '../../forms/product-form/product-form.component';
+import { CustomButtonComponentComponent } from '../custom-button-component/custom-button-component.component';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,12 @@ import { ProductFormComponent } from '../../forms/product-form/product-form.comp
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
+
+  onRowClicked(event: RowClickedEvent) {
+    alert('Hello')
+  }
+
+
   private gridApi!: GridApi<any>;
   pagination = true;
   paginationPageSize = 10;
@@ -34,7 +41,7 @@ export class ProductsComponent implements OnInit {
   public rowSelection: 'single' | 'multiple' = 'multiple';
 
   colDefs: ColDef[] = [
-    { field: 'name', filter: 'agTextColumnFilter', checkboxSelection: true },
+    { field: 'name', filter: 'agTextColumnFilter', checkboxSelection: false },
     {
       field: 'price',
       cellRenderer: (item: any) => {
@@ -47,16 +54,44 @@ export class ProductsComponent implements OnInit {
       headerName: 'Stock Quantity',
       filter: 'agTextColumnFilter',
     },
-    { field: 'category', filter: 'agTextColumnFilter' },
-    {
-      headerName: 'Options',
-      field: 'options',
-      cellRenderer: 'buttonRenderer', // Custom renderer for buttons
-      cellRendererParams: {
-        onEdit: (params: any) => this.onEditButtonClick(params),
-      },
-    },
+    { field: 'actions', headerName: 'Actions', cellRenderer: this.actionCellRenderer.bind(this) },
+    // { field: 'category', filter: 'agTextColumnFilter' },
+    // { field: 'actions', cellRenderer: this.createButtonRenderer() },
   ];
+
+  // createButtonRenderer() {
+  //   return (params: any) => {
+  //     return `<button>Edit</button> <button>Delete</button>`;
+  //   };
+  // }
+
+  actionCellRenderer(params: any) {
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => this.editRow(params.data));
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => this.deleteRow(params.data));
+
+    const container = document.createElement('div');
+    container.appendChild(editButton);
+    container.appendChild(deleteButton);
+
+    return container;
+  }
+
+  editRow(rowData: any) {
+    // Implement edit functionality
+  }
+
+  deleteRow(rowData: any) {
+    // Implement delete functionality
+  }
+
+
+
+  ///////////////
 
   productServices = inject(ProductService);
 

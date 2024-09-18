@@ -27,11 +27,12 @@ export class SalesComponent implements OnInit {
   public rowSelection: 'single' | 'multiple' = 'multiple';
 
   colDefs: ColDef[] = [
-    { field: 'customer_name', filter: 'agTextColumnFilter', checkboxSelection: true },
-    { field: 'product_name', filter: 'agTextColumnFilter' },
+    { field: 'customer_name', headerName:'Customer Name', filter: 'agTextColumnFilter', checkboxSelection: true },
+    { field: 'product_name', headerName:'Product', filter: 'agTextColumnFilter' },
     { field: 'quantity', filter: 'agTextColumnFilter' },
     {
       field: 'total_amount',
+      headerName:"Total Amount",
       cellRenderer: (item: any) => {
         return '$ ' + item.value;
       },
