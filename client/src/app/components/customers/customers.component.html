@@ -11,19 +11,9 @@ Create Customer</button>
             <app-customer-form/>
         </app-drawer>
         
-        <button (click)="onBtExport()" class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
+        <button  class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
             Export to Excel
         </button>
     </div>
-    <ag-grid-angular 
-[rowData]="itemList" 
-[columnDefs]="colDefs" 
-[defaultColDef]="defaultColDef" 
-[rowSelection]="rowSelection"
-[pagination]="true"
-[paginationPageSize] = "paginationPageSize"
 
-(gridReady)="onGridReady($event)"
-style="height: 500px;"
-    class="ag-theme-quartz" />
 </div>

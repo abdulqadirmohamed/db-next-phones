@@ -1,26 +1,40 @@
 <h1>Products</h1>
 <div class="flex justify-between items-center">
-    <button (click)="openProductDrawer()" class="bg-blue-700 text-white px-3 py-2 rounded-md my-4 text-sm flex items-center gap-2">
+    <button (click)="openProductDrawer()"
+        class="bg-blue-700 text-white px-3 py-2 rounded-md my-4 text-sm flex items-center gap-2">
         <lucide-icon name="plus"></lucide-icon>
-Create Product</button>
+        Create Product</button>
     <app-drawer [isOpen]="isProductDrawerOpen" [title]="'Create Product'" (onClose)="closeProductDrawer()">
-        <app-product-form/>
+        <app-product-form />
     </app-drawer>
-    
-    <button (click)="onBtExport()" class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
-        Export to Excel
-    </button>
+
 </div>
-<ag-grid-angular 
-[rowData]="itemList" 
-[columnDefs]="colDefs" 
-[defaultColDef]="defaultColDef" 
-[rowSelection]="rowSelection"
-[pagination]="true"
-[paginationPageSize] = "paginationPageSize"
-(rowClicked)="onRowClicked($event)"
 
-
-(gridReady)="onGridReady($event)"
-style="height: 500px;"
-    class="ag-theme-quartz capitalize" />
+<div class="bg-white capitalize">
+    <p-table [value]="itemList" [tableStyle]="{ 'min-width': '50rem' }" 
+    [paginator]="true" [rows]="10" 
+ 
+    styleClass="p-datatable-striped p-datatable-gridlines" >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Options</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-columns="columns">
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>${{ product.price }}</td>
+                <td>{{ product.stock_quantity }}</td>
+                <td>{{ product.category }}</td>
+                <th>
+                    <button class="bg-blue-700 text-white px-4 py-2 text-sm">Edit</button>
+                    <button class="bg-red-700 text-white px-4 py-2 text-sm">Delete</button>
+                </th>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
