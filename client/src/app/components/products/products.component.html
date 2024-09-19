@@ -9,6 +9,11 @@
     </app-drawer>
 
 </div>
+<div>
+    <button (click)="showToast()">Show Toast</button>
+    <p-toast></p-toast>
+    
+</div>
 
 <div class="bg-white capitalize">
     <p-table [value]="itemList" [tableStyle]="{ 'min-width': '50rem' }" 
@@ -16,12 +21,12 @@
  
     styleClass="p-datatable-striped p-datatable-gridlines" >
         <ng-template pTemplate="header" let-columns>
-            <tr>
+            <tr class="border-b">
                 <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Category</th>
-                <th>Options</th>
+                <th class="text-center">Options</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product let-columns="columns">
@@ -31,8 +36,8 @@
                 <td>{{ product.stock_quantity }}</td>
                 <td>{{ product.category }}</td>
                 <th>
-                    <button class="bg-blue-700 text-white px-4 py-2 text-sm">Edit</button>
-                    <button class="bg-red-700 text-white px-4 py-2 text-sm">Delete</button>
+                    <button (click)="editProduct()" class="bg-blue-700 text-white px-4 py-2 text-sm mx-2">Edit</button>
+                    <button (click)="deleteProduct(product)" class="bg-red-700 text-white px-4 py-2 text-sm mx-2">Delete</button>
                 </th>
             </tr>
         </ng-template>

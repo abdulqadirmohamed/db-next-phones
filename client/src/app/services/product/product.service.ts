@@ -25,4 +25,8 @@ export class ProductService {
   getTotalProducts(): Observable<{totalProducts: number}>{
     return this.http.get<{totalProducts:number}>(`${this.apiUrl}/products/total`)
   }
+
+  deleteProduct(id: number): Observable<Product>{
+    return this.http.delete<Product>(`${this.apiUrl}/products/${id}`)
+  }
 }
