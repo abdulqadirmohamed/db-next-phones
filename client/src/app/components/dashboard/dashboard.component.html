@@ -2,18 +2,22 @@
     <h1 class="mb-6">Dashboard</h1>
     <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
         <!-- Col 1 -->
-        <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 rounded">
+        @for (item of items; track $index) {
+        <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 md:px-4 rounded">
             <div class="flex gap-4 items-center">
-                <div class="bg-[#F1EDFC] text-[#7C2ED9] rounded-full w-12 h-12 p-1 flex items-center justify-center">
-                    <lucide-icon name="circle-dollar-sign"></lucide-icon>
+                <div [ngClass]="item.icon" class="rounded-full w-12 h-12 p-1 flex items-center justify-center">
+                    <lucide-icon [name]="item.icon"></lucide-icon>
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500">Total Today Sales</p>
-                    <h3 class="font-medium text-lg">${{totalTodaySales}}</h3>
+                    <p class="text-sm text-gray-500">{{item.label}}</p>
+                    <h3 class="font-medium text-lg">
+                      {{item.isMoney? '$':''}}
+                      {{item.total}}
+                    </h3>
                 </div>
             </div>
             <div>
-                <div class="flex items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
+                <div class="flex md:hidden items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
                     <span class="text-sm">3.47%</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -24,75 +28,9 @@
                 </div>
             </div>
         </div>
-        <!-- Col 2 -->
-        <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 rounded">
-            <div class="flex gap-4 items-center">
-                <div class="bg-[#F2FAFF] text-[#45AAE4] rounded-full w-12 h-12 p-1 flex items-center justify-center">
-                    <lucide-icon name="trending-up"></lucide-icon>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">Total Sales</p>
-                    <h3 class="font-medium text-lg">${{totalSales}}</h3>
-                </div>
-            </div>
-            <div>
-                <div class="flex items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
-                    <span class="text-sm">3.47%</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-arrow-up">
-                        <path d="m5 12 7-7 7 7" />
-                        <path d="M12 19V5" />
-                    </svg>
-                </div>
-            </div>
-        </div>
-                <!-- Col 4 -->
-                <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 rounded">
-                    <div class="flex gap-4 items-center">
-                        <div class="bg-[#FEEFF1] text-[#E5487B] rounded-full w-12 h-12 p-1 flex items-center justify-center">
-                            <lucide-icon name="package-2"></lucide-icon>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500">Total Products</p>
-                            <h3 class="font-medium text-lg">{{totalProducts}}</h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
-                            <span class="text-sm">3.47%</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-arrow-up">
-                                <path d="m5 12 7-7 7 7" />
-                                <path d="M12 19V5" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-        <!-- Col 3 -->
-        <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 rounded">
-            <div class="flex gap-4 items-center">
-                <div class="bg-[#FFF3E9] text-[#FA8D4C] rounded-full w-12 h-12 p-1 flex items-center justify-center">
-                    <lucide-icon name="users"></lucide-icon>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">Total Customers</p>
-                    <h3 class="font-medium text-lg">{{ totalCustomers }}</h3>
-                </div>
-            </div>
-            <div>
-                <div class="flex items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
-                    <span class="text-sm">3.47%</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-arrow-up">
-                        <path d="m5 12 7-7 7 7" />
-                        <path d="M12 19V5" />
-                    </svg>
-                </div>
-            </div>
-        </div>
+    }
+        
+              
 
     </div>
     <div class="grid lg:grid-cols-2 gap-6 my-4">

@@ -1,10 +1,10 @@
-<div class="bg-white md:flex flex-col hidden w-64 h-screen md:min-w-30 lg:w-64 border-r-2 transition-all duration-300 ease-in" [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''">
+<div class="bg-white flex flex-col w-64 h-full md:min-w-30 lg:w-64 border-r-2 transition-all duration-300 ease-in" [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''">
   <nav class="my-4">
-    <div class="flex justify-between items-center px-4">
+    <div class="flex justify-between items-center">
       @if (!isLeftSidebarCollapsed()) {
         <a routerLink="/" class="font-semibold text-xl">Next <span class="text-blue-700">Phones</span>  </a>
       }
-      <span (click)="toggleCollapse()">
+      <span (click)="toggleCollapse()" class="cursor-pointer">
         <lucide-icon name="menu"></lucide-icon>
       </span>
     </div>
@@ -12,7 +12,7 @@
       <ul class="mt-14 text-gray-700">
         @for (item of items; track $index) {
         <li class="my-2">
-          <a [routerLink]="item.routeLink" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
+          <a [routerLink]="item.routeLink" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-4 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
             class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
             <lucide-icon [name]="item.icon" [size]="20" class="group-hover:text-blue-700 ml-2"
               routerLinkActive="group-hover:text-white">

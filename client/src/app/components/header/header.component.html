@@ -5,8 +5,11 @@
         </div>
     </div>
     <div class="flex items-center gap-4 text-gray-500">
-        <div class="border-[2px] rounded-full p-2">
-            <lucide-icon name="bell" [size]="18"></lucide-icon>
+        <div class="card flex justify-content-center">
+            <p-menu #menu [model]="items" [popup]="true" />
+            <p-button (onClick)="menu.toggle($event)">
+                <lucide-icon name="bell" [size]="20"></lucide-icon>
+            </p-button>
         </div>
         <div class="flex items-center gap-2">
             <img width="30" src="https://avatars.githubusercontent.com/u/63993502?v=4" alt="" class="rounded-full">
