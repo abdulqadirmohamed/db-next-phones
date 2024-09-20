@@ -1,6 +1,6 @@
-
 <div class="flex">
-    <app-sidebar />
+    <app-sidebar [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
+        (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)" />
     <div class="flex-1">
         <app-header />
         <div class="p-6">

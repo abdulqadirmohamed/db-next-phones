@@ -1,15 +1,13 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
-  NgModule,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ToastModule } from 'primeng/toast';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 
@@ -26,26 +24,19 @@ import {
   TrendingUp,
   CircleDollarSign,
   Plus,
-  Package2
+  Package2,
+  Menu,
+  X
 } from 'lucide-angular';
 import { authInterceptor } from './interceptor/auth.interceptor';
-import { MessageService } from 'primeng/api';
 
-NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ToastModule
-  ],
-  providers: [MessageService]
-})
 
 export const appConfig: ApplicationConfig = {
   providers: [
+ 
     provideHttpClient(withInterceptors([authInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    ToastModule,
     importProvidersFrom(
       LucideAngularModule.pick({
         Bell,
@@ -59,8 +50,12 @@ export const appConfig: ApplicationConfig = {
         TrendingUp,
         CircleDollarSign,
         Plus,
-        Package2
-      })
+        Package2,
+        Menu,
+        X
+      }),
+      BrowserModule,
+      BrowserAnimationsModule
     )
   ],
 };

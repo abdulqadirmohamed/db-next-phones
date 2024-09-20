@@ -6,10 +6,15 @@ import { Product } from '../../model/product';
 import { LucideAngularModule } from 'lucide-angular';
 import { DrawerComponent } from '../drawer/drawer.component';
 import { ProductFormComponent } from '../../forms/product-form/product-form.component';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
+import { CommonModule } from '@angular/common';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+
 
 @Component({
   selector: 'app-products',
@@ -21,6 +26,10 @@ import { Button } from 'primeng/button';
     LucideAngularModule,
     DrawerComponent,
     ProductFormComponent,
+    CommonModule,
+    InputTextModule,
+    IconFieldModule,
+    InputIconModule
   ],
   providers: [MessageService],
   templateUrl: './products.component.html',
@@ -28,13 +37,13 @@ import { Button } from 'primeng/button';
 })
 export class ProductsComponent implements OnInit {
 
-
-
   itemList: Product[] = [];
+  searchValue: string | undefined;
 
 
 
   productServices = inject(ProductService);
+  dt2: any;
 
   ngOnInit(): void {
     this.productServices.getAllItems().subscribe((result: any) => {
@@ -43,16 +52,16 @@ export class ProductsComponent implements OnInit {
   }
 
   // Actions(Edit and Delete Buttons)
-  editProduct = () =>{
+  editProduct = () => {
     alert('edit')
   }
-  deleteProduct = (id: number):void =>{
-    if(confirm('Are you sure you want to delete this item?')){
+  deleteProduct = (id: number): void => {
+    if (confirm('Are you sure you want to delete this item?')) {
       this.productServices.deleteProduct(id).subscribe({
-        next:()=>{
+        next: () => {
           alert('Item deleted successfully!')
           window.location.reload()
-        }, error:(err)=>{
+        }, error: (err) => {
           console.error('Deletion failed', err);
           alert('Error deleting item.');
         }
@@ -61,20 +70,27 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) { }
 
   showToast() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
   }
 
- 
+  // qauntity
+
+
+// clear
+clear(table: Table) {
+  table.clear();
+  this.searchValue = ''
+}
 
   // Drawer
-  isProductDrawerOpen  = false;
+  isProductDrawerOpen = false;
   openProductDrawer() {
-    this.isProductDrawerOpen  = true;
+    this.isProductDrawerOpen = true;
   }
   closeProductDrawer() {
-    this.isProductDrawerOpen  = false;
+    this.isProductDrawerOpen = false;
   }
 }

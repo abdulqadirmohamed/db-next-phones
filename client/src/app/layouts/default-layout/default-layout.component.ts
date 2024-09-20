@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { HeaderComponent } from "../../components/header/header.component";
 import { RouterOutlet } from '@angular/router';
@@ -11,5 +11,9 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './default-layout.component.css'
 })
 export class DefaultLayoutComponent {
+  isLeftSidebarCollapsed = signal<boolean>(false);
 
+  changeIsLeftSidebarCollapsed(isLeftSidebarCollapsed: boolean): void {
+    this.isLeftSidebarCollapsed.set(isLeftSidebarCollapsed);
+  }
 }

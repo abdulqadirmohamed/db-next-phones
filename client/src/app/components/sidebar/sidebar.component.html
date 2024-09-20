@@ -1,54 +1,29 @@
-<div class="bg-white md:flex flex-col hidden w-64 h-screen md:w-80 lg:w-64 border-r-2">
+<div class="bg-white md:flex flex-col hidden w-64 h-screen md:min-w-30 lg:w-64 border-r-2 transition-all duration-300 ease-in" [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''">
   <nav class="my-4">
-    <a routerLink="/" class="font-semibold text-xl px-6">Next <span class="text-blue-700">Phones</span> </a>
+    <div class="flex justify-between items-center px-4">
+      @if (!isLeftSidebarCollapsed()) {
+        <a routerLink="/" class="font-semibold text-xl">Next <span class="text-blue-700">Phones</span>  </a>
+      }
+      <span (click)="toggleCollapse()">
+        <lucide-icon name="menu"></lucide-icon>
+      </span>
+    </div>
     <div class="flex flex-col justify-between h-[700px]">
       <ul class="mt-14 text-gray-700">
+        @for (item of items; track $index) {
         <li class="my-2">
-          <a routerLink="/dashboard" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
+          <a [routerLink]="item.routeLink" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
             class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
-            <lucide-icon name="layout-dashboard" [size]="20" class="group-hover:text-blue-700 ml-2"
-              routerLinkActive="group-hover:text-white"></lucide-icon>
-            Dashboard
+            <lucide-icon [name]="item.icon" [size]="20" class="group-hover:text-blue-700 ml-2"
+              routerLinkActive="group-hover:text-white">
+            </lucide-icon>
+             @if (!isLeftSidebarCollapsed()) {
+              <span>{{ item.label }}</span>
+             }
           </a>
         </li>
-        <li class="my-2">
-          <a routerLink="/product" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
-            <lucide-icon name="shopping-bag" [size]="20" class="group-hover:text-blue-700 ml-2"></lucide-icon>
-            Products
-          </a>
-        </li>
-        <li class="my-2">
-          <a routerLink="/sales" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
-          class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
-            <lucide-icon name="scan-line" [size]="20" class="group-hover:text-blue-700 ml-2"></lucide-icon>
-            Sales
-          </a>
-        </li>
-        <li class="my-2">
-          <a routerLink="/customer" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
-            <lucide-icon name="users" [size]="20" class="group-hover:text-blue-700 ml-2"></lucide-icon>
-            Customers
-          </a>
-        </li>
-      </ul>
-      <ul>
-        <li class="my-2">
-          <a routerLink="/setting" routerLinkActive="bg-[#E6F4FF] text-blue-700 border-r-2 border-blue-700" [routerLinkActiveOptions]="{ exact: true }"
-            class="text-[16px] flex items-center gap-3 py-3 px-4 group hover:bg-gray-100">
-            <lucide-icon name="settings" [size]="20" class="group-hover:text-blue-700 ml-2"></lucide-icon>
-            Setting
-          </a>
-        </li>
-        <li class="my-2">
-          <button (click)="onLogout()" 
-            class="text-[16px] flex items-center gap-3 py-3 px-4 group">
-            <lucide-icon name="log-out" [size]="20" class="group-hover:text-blue-700 ml-2"></lucide-icon>
-            Logout
-        </button>
-        </li>
-      </ul>
+      }
+        </ul>
     </div>
   </nav>
 </div>
