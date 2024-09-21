@@ -9,11 +9,13 @@ import { ProductFormComponent } from '../../forms/product-form/product-form.comp
 import { Table, TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { Button } from 'primeng/button';
+import { Button, ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { RouterLink } from '@angular/router';
+import { MenuModule } from 'primeng/menu';
 
 
 @Component({
@@ -29,7 +31,9 @@ import { InputIconModule } from 'primeng/inputicon';
     CommonModule,
     InputTextModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    RouterLink,
+    MenuModule, ButtonModule
   ],
   providers: [MessageService],
   templateUrl: './products.component.html',

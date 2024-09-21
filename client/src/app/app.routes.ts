@@ -8,6 +8,7 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
 import { CustomersComponent } from './components/customers/customers.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { authGuard } from './guard/auth.guard';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,7 @@ export const routes: Routes = [
           { path: 'product', component: ProductsComponent },
           { path: 'customer', component: CustomersComponent },
           { path: 'sales', component: SalesComponent },
+          { path: 'product/edit/:id', component: EditProductComponent },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
       },

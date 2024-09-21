@@ -26,7 +26,9 @@ import {
   Plus,
   Package2,
   Menu,
-  X
+  X,
+  Trash2,
+  Pencil
 } from 'lucide-angular';
 import { authInterceptor } from './interceptor/auth.interceptor';
 
@@ -52,7 +54,9 @@ export const appConfig: ApplicationConfig = {
         Plus,
         Package2,
         Menu,
-        X
+        X,
+        Trash2,
+        Pencil
       }),
       BrowserModule,
       BrowserAnimationsModule

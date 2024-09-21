@@ -16,28 +16,17 @@
 </div>
 
 <div class="bg-white capitalize">
-    <p-table 
-    #dt2
-    [value]="itemList"
-    [paginator]="true" 
-    [rows]="5" 
-    [tableStyle]="{'min-width': '50rem'}"
-    responsiveLayout="stack" 
-    [breakpoint]="'960px'" 
-    [globalFilterFields]="['name', 'price', 'quantity', 'category']"
-    [rowsPerPageOptions]="[5, 10, 20]"
-        dataKey="id" styleClass="p-datatable-striped p-datatable-gridlines">
+    <p-table #dt2 [value]="itemList" [paginator]="true" [rows]="5" [tableStyle]="{'min-width': '50rem'}"
+        responsiveLayout="stack" [breakpoint]="'960px'" [globalFilterFields]="['name', 'price', 'quantity', 'category']"
+        [rowsPerPageOptions]="[5, 10, 20]" dataKey="id" styleClass="p-datatable-striped p-datatable-gridlines">
         <ng-template pTemplate="caption">
             <div class="">
                 <p-iconField iconPosition="left" class="ml-auto">
                     <p-inputIcon>
                         <i class="pi pi-search"></i>
                     </p-inputIcon>
-                    <input 
-                    class="p-3 border"
-                        pInputText 
-                        type="text" 
-                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')" 
+                    <input class="p-3 border" pInputText type="text"
+                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')"
                         placeholder="Search keyword" />
                 </p-iconField>
             </div>
@@ -45,11 +34,11 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr class="border-b border-t">
-                <th >Name</th>
+                <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Category</th>
-                <th class="text-center">Options</th>
+                <th class="text-center">Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product let-columns="columns">
@@ -58,10 +47,15 @@
                 <td>${{ product.price }}</td>
                 <td>{{ product.stock_quantity }}</td>
                 <td>{{ product.category }}</td>
-                <th>
-                    <button (click)="editProduct(product)" class="bg-blue-700 text-white px-4 py-2 text-sm mx-2">Edit</button>
-                    <button (click)="deleteProduct(product)"
-                        class="bg-red-700 text-white px-4 py-2 text-sm mx-2">Delete</button>
+                <th class="flex items-center text-center">
+                
+                    <a [routerLink]="['/product/edit', product.id]" class=" px-4 py-2 text-sm mx-2">
+                        <lucide-icon size="20"  name="trash-2"></lucide-icon>
+                    </a>
+                    <button
+                        class="px-4 py-2 text-sm mx-2">
+                        <lucide-icon size="20" name="pencil"></lucide-icon>
+                    </button>
                 </th>
             </tr>
         </ng-template>
