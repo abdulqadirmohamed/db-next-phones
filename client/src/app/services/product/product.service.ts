@@ -25,6 +25,16 @@ export class ProductService {
   getTotalProducts(): Observable<{totalProducts: number}>{
     return this.http.get<{totalProducts:number}>(`${this.apiUrl}/products/total`)
   }
+  
+  // Method to get a product by ID
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
+
+ // Method to update a product
+ updateProduct(product: Product): Observable<Product> {
+  return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
+}
 
   deleteProduct(id: number): Observable<Product>{
     return this.http.delete<Product>(`${this.apiUrl}/products/${id}`)

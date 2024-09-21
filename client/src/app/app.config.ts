@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
+import { FormsModule } from '@angular/forms';
 
 import {
   Bell,
@@ -35,11 +36,13 @@ import { authInterceptor } from './interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
- 
     provideHttpClient(withInterceptors([authInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(
+      FormsModule, // Import FormsModule here
+      BrowserModule,
+      BrowserAnimationsModule,
       LucideAngularModule.pick({
         Bell,
         Search,
@@ -57,9 +60,7 @@ export const appConfig: ApplicationConfig = {
         X,
         Trash2,
         Pencil
-      }),
-      BrowserModule,
-      BrowserAnimationsModule
+      })
     )
   ],
 };
