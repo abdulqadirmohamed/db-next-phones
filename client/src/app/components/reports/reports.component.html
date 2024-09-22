@@ -1,0 +1,88 @@
+<p>reports !</p>
+<div class="bg-white p-6 ">
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="block w-full ">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-600 w-full">Customer Name</label>
+            <select id="customerSelect" [(ngModel)]="selectedCustomer"
+            
+                class="h-12 border capitalize border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+                <option selected disabled>Choose a customer</option>
+                <option  *ngFor="let customer of itemList" [value]="customer.id" class="capitalize">{{ customer.name }}</option>
+            </select>
+        </div>
+        <div class="block w-full">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-600 w-full">From</label>
+            <input type="date"
+                class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+        </div>
+        <div class="block w-full">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-600 w-full">To</label>
+            <input type="date"
+                class="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+        </div>
+    </div>
+
+    <div class="my-4">
+        <div class="flex items-center justify-between gap-3">
+            <div>
+                <button type='button'
+                class='py-2.5 px-6 text-sm bg-blue-700 text-white rounded-md cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-blue-600'>Generate
+                report</button>
+            </div>
+            <div class="flex items-center gap-4">
+                <button type='button'
+                class='py-2.5 px-6 text-sm bg-blue-700 text-white rounded-md cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-blue-600'>
+                Print</button>
+                <button type='button'
+                class='py-2.5 px-6 text-sm bg-blue-700 text-white rounded-md cursor-pointer font-semibold text-center shadow-xs transition-all duration-500 hover:bg-blue-600'>
+                Export PDF</button>
+            </div>
+        </div>
+     
+    </div>
+
+    <div class="my-6">
+        <div class="flex flex-col">
+            <div class=" overflow-x-auto">
+                <div class="min-w-full inline-block align-middle">
+                    <div class="overflow-hidden border rounded-lg border-gray-300">
+                        <table class=" min-w-full  rounded-xl">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th scope="col"
+                                        class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">
+                                        Invoice No </th>
+                                    <th scope="col"
+                                        class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">
+                                        Date</th>
+                                    <th scope="col"
+                                        class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">
+                                        Customer Name
+                                    </th>
+                                    <th scope="col"
+                                        class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize">
+                                        Total Amount </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-300 ">
+                                <tr>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900 ">
+                                        001</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
+                                        09, 22, 2024
+                                    </td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
+                                        Abdulqadir Mohamed
+                                    </td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
+                                        $700</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -38,7 +38,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Category</th>
-                <th class="text-center">Action</th>
+                <th class="">Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product let-columns="columns">
@@ -47,13 +47,14 @@
                 <td>${{ product.price }}</td>
                 <td>{{ product.stock_quantity }}</td>
                 <td>{{ product.category }}</td>
-                <th class="flex items-center text-center">
+                <th class="flex items-center text-right">
                 
-                    <a [routerLink]="['/product/edit', product.id]" class=" px-4 py-2 text-sm mx-2">
-                        <lucide-icon size="20" name="pencil"></lucide-icon>
-                    </a>
+                    <button (click)="onEdit(product.id)" class="bg-green-700 hover:bg-green-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
+                        <lucide-icon size="20" name="pencil"></lucide-icon> 
+                    </button>
                     <button
-                        class="px-4 py-2 text-sm mx-2">
+                    (click)="deleteProduct(product.id)"
+                        class="bg-red-700 hover:bg-red-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
                         <lucide-icon size="20"  name="trash-2"></lucide-icon>
                     </button>
                 </th>

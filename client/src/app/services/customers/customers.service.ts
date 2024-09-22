@@ -24,4 +24,8 @@ export class CustomersService {
   getTotalCustomers(): Observable<{totalCustomers: number}>{
     return this.http.get<{totalCustomers:number}>(`${this.apiUrl}/customers/total`)
   }
+
+  deletCustomer(id: number): Observable<Customers>{
+    return this.http.delete<Customers>(`${this.apiUrl}/products/${id}`)
+  }
 }

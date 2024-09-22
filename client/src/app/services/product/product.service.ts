@@ -28,12 +28,12 @@ export class ProductService {
   
   // Method to get a product by ID
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
   }
 
  // Method to update a product
- updateProduct(product: Product): Observable<Product> {
-  return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
+ updateProduct(productId: number, product: Product): Observable<Product> {
+  return this.http.put<Product>(`${this.apiUrl}/products/${productId}`, product);
 }
 
   deleteProduct(id: number): Observable<Product>{

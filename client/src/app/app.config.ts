@@ -5,12 +5,10 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { routes } from './app.routes';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   Bell,
@@ -29,7 +27,8 @@ import {
   Menu,
   X,
   Trash2,
-  Pencil
+  Pencil,
+  Files
 } from 'lucide-angular';
 import { authInterceptor } from './interceptor/auth.interceptor';
 
@@ -40,7 +39,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(
-      FormsModule, // Import FormsModule here
+      FormsModule, 
+      ReactiveFormsModule,
       BrowserModule,
       BrowserAnimationsModule,
       LucideAngularModule.pick({
@@ -59,7 +59,8 @@ export const appConfig: ApplicationConfig = {
         Menu,
         X,
         Trash2,
-        Pencil
+        Pencil,
+        Files
       })
     )
   ],

@@ -48,6 +48,11 @@ export class SidebarComponent implements OnInit{
       icon: 'users',
       label: 'Customer',
     },
+    {
+      routeLink: 'reports',
+      icon: 'files',
+      label: 'Reports',
+    },
   ];
 
 

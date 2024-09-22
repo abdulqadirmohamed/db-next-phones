@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MenuModule } from 'primeng/menu';
 
 
@@ -44,6 +44,7 @@ export class ProductsComponent implements OnInit {
   itemList: Product[] = [];
   searchValue: string | undefined;
 
+  constructor(private messageService: MessageService, private router: Router) { }
 
 
   productServices = inject(ProductService);
@@ -74,7 +75,6 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  constructor(private messageService: MessageService) { }
 
   showToast() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
@@ -96,5 +96,10 @@ clear(table: Table) {
   }
   closeProductDrawer() {
     this.isProductDrawerOpen = false;
+  }
+
+  // edit button
+  onEdit(productId: number){
+    this.router.navigate(['/product/edit', productId]);
   }
 }

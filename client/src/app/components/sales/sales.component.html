@@ -1,1 +1,50 @@
-<p>sales</p>
+
+<div class="bg-white capitalize">
+    <p-table #dt2 [value]="itemList" [paginator]="true" [rows]="5" [tableStyle]="{'min-width': '50rem'}"
+        responsiveLayout="stack" [breakpoint]="'960px'" [globalFilterFields]="['name', 'price', 'quantity', 'category']"
+        [rowsPerPageOptions]="[5, 10, 20, 50]" dataKey="id" styleClass="p-datatable-striped p-datatable-gridlines">
+        <ng-template pTemplate="caption">
+            <div class="">
+                <p-iconField iconPosition="left" class="ml-auto">
+                    <p-inputIcon>
+                        <i class="pi pi-search"></i>
+                    </p-inputIcon>
+                    <input class="p-3 border" pInputText type="text"
+                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')"
+                        placeholder="Search keyword" />
+                </p-iconField>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+            <tr class="border-b border-t">
+                <th>customer name</th>
+                <th>product</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th class="">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-sales let-columns="columns">
+            <tr>
+                <td>{{ sales.customer_name }}</td>
+                <td>{{ sales.product_name }}</td>
+                <td>{{ sales.quantity }}</td>
+                <td>${{ sales.total_amount }}</td>
+                <td>{{ sales.sale_date | date:'medium' }}</td>
+                <th class="flex items-center text-right">
+                
+                    <button  class="bg-green-700 hover:bg-green-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
+                        <lucide-icon size="20" name="pencil"></lucide-icon> 
+                    </button>
+                    <button
+                    (click)="deleteSales(sales.id)"
+                        class="bg-red-700 hover:bg-red-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
+                        <lucide-icon size="20"  name="trash-2"></lucide-icon>
+                    </button>
+                </th>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

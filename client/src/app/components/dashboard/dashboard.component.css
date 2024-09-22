@@ -15,3 +15,12 @@
     background-color: #FFF3E9;
     color: #FA8D4C;
 }
+
+/* ::ng-deep .p-datepicker table td > span {
+    background-color: orange;
+  } */
+  
+  ::ng-deep .p-datepicker table td.p-datepicker-today > span {
+    background-color: #1D4ED8;
+    color: white;
+  }

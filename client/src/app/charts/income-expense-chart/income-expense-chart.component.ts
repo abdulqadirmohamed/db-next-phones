@@ -22,12 +22,12 @@ export class IncomeExpenseChartComponent implements OnInit {
         const textColor = documentStyle.getPropertyValue('--text-color');
 
         this.data = {
-            labels: ['A', 'B', 'C'],
+            labels: ['Income', 'Expense'],
             datasets: [
                 {
-                    data: [300, 50, 100],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                    data: [300, 50],
+                    backgroundColor: [documentStyle.getPropertyValue('--blue-600'), documentStyle.getPropertyValue('--yellow-500')],
+                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-400')]
                 }
             ]
         };

@@ -33,7 +33,7 @@
               
 
     </div>
-    <div class="grid lg:grid-cols-2 gap-6 my-4">
+    <div class="grid lg:grid-cols-3 gap-6 my-4">
         <div class="bg-white p-8">
             <div class="flex justify-between items-center">
                 <h1 class="mb-4">Recent Orders</h1>
@@ -101,11 +101,19 @@
                 </table>
             </div>
           </div>
+          <!-- Calendeer -->
+          <div class="card flex justify-content-center">
+            <p-calendar 
+                class="max-w-full" 
+                [(ngModel)]="date" 
+                [inline]="true" 
+                [showWeek]="true" />
+        </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 my-4">
-        <div class="bg-white p-8">
-            <h1>Income VS Expense</h1>
+    <div class="grid md:grid-cols-3 gap-6 my-4">
+        <div class="bg-white p-8 flex flex-col items-center justify-center">
+            <h1 class="text-center my-2">Income VS Expense</h1>
             <div class="my-3">
                 <app-income-expense-chart/>
             </div>

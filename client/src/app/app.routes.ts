@@ -9,6 +9,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { authGuard } from './guard/auth.guard';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,7 @@ export const routes: Routes = [
           { path: 'product', component: ProductsComponent },
           { path: 'customer', component: CustomersComponent },
           { path: 'sales', component: SalesComponent },
+          { path: 'reports', component: ReportsComponent },
           { path: 'product/edit/:id', component: EditProductComponent },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]

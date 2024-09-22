@@ -6,17 +6,21 @@ import { SalesService } from '../../services/sales/sales.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { ProductService } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, IncomeExpenseChartComponent],
+  imports: [CommonModule, LucideAngularModule, IncomeExpenseChartComponent, CalendarModule, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
 
   usersList:any[] = []
+
+  date: Date[] | undefined;
 
   totalTodaySales: number = 0;
   totalSales: number = 0;
