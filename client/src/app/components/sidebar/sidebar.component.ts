@@ -44,6 +44,11 @@ export class SidebarComponent implements OnInit{
       label: 'Sales',
     },
     {
+      routeLink: 'sales/invoice',
+      icon: 'shopping-bag',
+      label: 'Create Sales',
+    },
+    {
       routeLink: 'customer',
       icon: 'users',
       label: 'Customer',

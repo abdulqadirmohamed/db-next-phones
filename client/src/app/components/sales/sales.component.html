@@ -1,5 +1,7 @@
 
 <div class="bg-white capitalize">
+    <a routerLink="/sales/invoice" routerLinkActive="router-link-active"  routerLinkActive="router-link-active"  class="bg-blue-700 px-4 py-2 rounded-md text-white">
+        Create sale</a>
     <p-table #dt2 [value]="itemList" [paginator]="true" [rows]="5" [tableStyle]="{'min-width': '50rem'}"
         responsiveLayout="stack" [breakpoint]="'960px'" [globalFilterFields]="['name', 'price', 'quantity', 'category']"
         [rowsPerPageOptions]="[5, 10, 20, 50]" dataKey="id" styleClass="p-datatable-striped p-datatable-gridlines">

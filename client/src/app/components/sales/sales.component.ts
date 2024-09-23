@@ -7,6 +7,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { LucideAngularModule } from 'lucide-angular';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sales',
@@ -17,7 +18,8 @@ import { DatePipe } from '@angular/common';
     IconFieldModule,
     InputIconModule,
     LucideAngularModule, 
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.css'
