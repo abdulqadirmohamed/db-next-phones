@@ -1,9 +1,8 @@
-<div class="container mx-auto p-6 rounded-md bg-white">
-  <div class="grid grid-cols-5 gap-6">
-    <div class="col-span-2">
-      <table
-        class="min-w-full border border-gray-200 rounded-md text-left text-sm"
-      >
+<div class=" p-6 rounded-md bg-white">
+  <form class="grid md:grid-cols-7 gap-4">
+    <!-- Add Product  -->
+    <div class="md:col-span-5 md:order-none order-last">
+      <table>
         <thead>
           <tr class="">
             <th class="py-2 px-4 border-b">SL</th>
@@ -19,45 +18,67 @@
             <td class="py-2 px-4 border-b">1</td>
             <td class="py-2 px-4 border-b">
               <div class="flex justify-content-center">
-                <p-dropdown
-                  [options]="products"
-                  [(ngModel)]="selectedProduct"
-                  optionLabel="name"
-                  [filter]="true"
-                  filterBy="name"
-                  [showClear]="true"
-                  placeholder="Select a Product"
-                  class=" border-[1px] border-blue-500 rounded-md"
-
-                >
+                <p-dropdown [options]="productList" [(ngModel)]="selectedProduct" optionLabel="name" [filter]="true"
+                  filterBy="name" [showClear]="true" placeholder="Select a Product"
+                  class=" border-[1px] border-blue-500 rounded-md">
                   <ng-template pTemplate="selectedItem" let-selectedOption>
                     <div>{{ selectedOption.name }}</div>
                   </ng-template>
-                  <ng-template let-country pTemplate="item">
-                      <div>{{ country.name }}</div>
+                  <ng-template let-product pTemplate="item">
+                    <div>{{ product.name }}</div>
                   </ng-template>
                 </p-dropdown>
               </div>
             </td>
             <td class="py-2 px-4 border-b">
-                <input type="text" placeholder="Quantity" class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
+              <input type="text" placeholder="Quantity"
+                class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
             </td>
             <td class="py-2 px-4 border-b">
-                <input type="text" placeholder="Price" class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
+              <input type="text" placeholder="Price"
+                class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
             </td>
             <td class="py-2 px-4 border-b">
-                <input type="text" placeholder="Discount" class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
+              <input type="text" placeholder="Discount"
+                class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
             </td>
             <td class="py-2 px-4 border-b">
-                <input type="text" placeholder="Amount" class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
+              <input type="text" placeholder="Amount"
+                class="px-4 py-3 border-blue-500 border-[1px] outline-none rounded-md">
             </td>
           </tr>
         </tbody>
       </table>
-      <button class="px-4 py-2 bg-blue-700 text-white rounded-md my-5">Add Product</button>
     </div>
-    <div>
-        <h1></h1>
+    <!--  -->
+    <div class="md:col-span-2 ">
+      <div>
+        <!-- Choose customer -->
+        <div class="flex justify-between capitalize">
+          <p-dropdown [options]="customerList" [(ngModel)]="selectedCustomer" optionLabel="name" [filter]="true"
+            filterBy="name" [showClear]="true" placeholder="Select a Product"
+            class=" border-[1px] border-blue-500 rounded-md w-full" [style]="{'minWidth':'100%'}">
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div>{{ selectedOption.name }}</div>
+            </ng-template>
+            <ng-template let-customer pTemplate="item" class="capitalize">
+              <div>{{ customer.name }}</div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <!-- Date -->
+        <div class="my-3">
+          <label for="date" class="block text-sm font-medium text-gray-700">Date:</label>
+          <input type="date" id="date"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500" />
+        </div>
+        <div class="my-3">
+          <label for="date" class="block text-sm font-medium text-gray-700">Due date:</label>
+          <input type="date" id="date"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500" />
+        </div>
+
+      </div>
     </div>
-  </div>
+  </form>
 </div>
