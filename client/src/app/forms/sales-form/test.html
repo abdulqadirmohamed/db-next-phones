@@ -86,3 +86,47 @@
       </div>
     </form>
   </div>
+
+
+<!-- --------------------------------------------------- -->
+
+<div formArrayName="items" class="my-5">
+  <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="mb-4">
+    <div class="grid grid-cols-3 gap-4">
+      <div>
+        <label class="block text-sm font-medium">Product Name</label>
+        <select id="product" formControlName="itemName"
+          class="h-12 border capitalize border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+          <option selected disabled>Choose a product</option>
+          <option *ngFor="let product of productList" [value]="product.name" class="capitalize">{{ product.name
+            }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Quantity</label>
+        <input type="number" formControlName="quantity"
+          class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Price</label>
+        <input type="number" formControlName="price"
+          class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500" />
+      </div>
+    </div>
+    <hr class="my-3">
+    <div class="flex justify-end mt-2">
+      <button type="button" class="text-red-500" (click)="removeItem(i)" *ngIf="items.length > 1">
+        Remove
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+

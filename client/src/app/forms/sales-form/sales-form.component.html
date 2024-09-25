@@ -1,17 +1,20 @@
 <div class=" p-6 bg-white rounded shadow">
   <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
-    <div class="grid grid-cols-3 gap-6">
+    <div class="grid grid-cols-3 gap-6 items-center">
       <!-- Customer Name -->
       <div class="mb-4">
         <label for="customerName" class="block text-sm font-medium">Customer Name</label>
-        <input type="text" id="customerName" formControlName="customerName"
-          class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500"
-          placeholder="Enter customer name" />
+        <select id="customer" formControlName="customerName"
+          class="h-12 border capitalize my-2 border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+          <option *ngFor="let customer of customerList" [value]="customer.name" class="capitalize">{{ customer.name
+            }}
+          </option>
+        </select>
       </div>
       <!-- Customer Phone -->
       <div class="mb-4 ">
         <label for="customerName" class="block text-sm font-medium">Customer Phone</label>
-        <input type="text" id="customerName" formControlName="customerName"
+        <input type="text" id="customerName" formControlName="customerName" [value]="393939"
           class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500"
           placeholder="Enter customer phone" />
       </div>
@@ -24,35 +27,48 @@
     </div>
     <hr>
     <!-- Invoice Items -->
-    <div formArrayName="items" class="my-5">
-      <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="mb-4">
-        <div class="grid grid-cols-3 gap-4">
-          <div>
-            <label class="block text-sm font-medium">Item Name</label>
-            <input type="text" formControlName="itemName"
-              class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500"
-              placeholder="Enter item name" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium">Quantity</label>
-            <input type="number" formControlName="quantity"
-              class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium">Price</label>
-            <input type="number" formControlName="price"
-              class="px-4 py-2 border-blue-700 border-[1px] w-full rounded-md my-2 focus:border-indigo-500 focus:ring-indigo-500" />
-          </div>
-        </div>
-        <hr class="my-3">
-        <div class="flex justify-end mt-2">
-          <button type="button" class="text-red-500" (click)="removeItem(i)" *ngIf="items.length > 1">
-            Remove
-          </button>
-        </div>
-      </div>
-
-    </div>
+    <table class="min-w-full border-collapse">
+      <thead>
+        <tr class="bg-black text-white">
+          <th class="border px-4 py-2 text-left">Product</th>
+          <th class="border px-4 py-2 text-left">Quantity</th>
+          <th class="border px-4 py-2 text-left">Price</th>
+          <th class="border px-4 py-2 text-left">discount</th>
+          <th class="border px-4 py-2 text-left">amount</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="items">
+        <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+          <td class="border px-4 py-2">
+            <select id="product" formControlName="itemName"
+              class="h-12 border capitalize border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none">
+              <option selected disabled>Choose a product</option>
+              <option *ngFor="let product of productList" [value]="product.name" class="capitalize">{{ product.name
+                }}
+              </option>
+            </select>
+          </td>
+          <td class="border px-4 py-2">
+            <input type="number" placeholder="Quantity" formControlName="quantity" class="w-full p-2 border rounded-md">
+          </td>
+          <td class="border px-4 py-2">
+            <input type="number" placeholder="price" formControlName="price" class="w-full p-2 border rounded-md">
+          </td>
+          <td class="border px-4 py-2">
+            <input type="number" placeholder="discount" formControlName="discount" class="w-full p-2 border rounded-md">
+          </td>
+          <td class="border px-4 py-2 flex items-center justify-between gap-3">
+            <input type="number" placeholder="50000" formControlName="amount" class="w-full p-2 border rounded-md">
+            <div class="flex justify-end mt-2">
+              <button type="button" class="text-red-500 hover:text-red-700 text-2xl" (click)="removeItem(i)"
+                *ngIf="items.length > 1">
+                &times;
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Add Item Button -->
     <div class="flex justify-end">

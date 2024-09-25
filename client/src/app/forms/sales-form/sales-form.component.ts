@@ -44,6 +44,8 @@ export class SalesFormComponent implements OnInit {
       itemName: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],
       price: [0, [Validators.required, Validators.min(0)]],
+      discount: [0, [Validators.min(0)]],
+      amount: [0, [Validators.required, Validators.min(0)]],
     });
   }
   addItem() {
