@@ -6,101 +6,76 @@ import { ProductService } from '../../services/product/product.service';
 import { Customers } from '../../model/customers';
 import { CustomersService } from '../../services/customers/customers.service';
 import { CalendarModule } from 'primeng/calendar';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-sales-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, DropdownModule, CalendarModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, DropdownModule, CalendarModule],
   templateUrl: './sales-form.component.html',
   styleUrl: './sales-form.component.css'
 })
-export class SalesFormComponent implements OnInit  {
-  salesForm: FormGroup;
-
+export class SalesFormComponent implements OnInit {
+  invoiceForm!: FormGroup;
+  
   productList: Product[] = []
   selectedProduct: string | undefined;
-
   customerList: Customers[] = []
   selectedCustomer: string | undefined;
 
-  date2: Date | undefined;
+
 
   productService = inject(ProductService)
   customerService = inject(CustomersService)
-i: any;
 
   constructor(private fb: FormBuilder) {
-    this.salesForm = this.fb.group({
-      sales: this.fb.array([this.createSaleItem()]),  // Initialize with one item
+    this.invoiceForm = this.fb.group({
+      customerName: ['', Validators.required],
+      invoiceDate: ['', Validators.required],
+      items: this.fb.array([this.createItem()]),
     });
   }
-
-   // Get the form array
-   get sales(): FormArray {
-    return this.salesForm.get('sales') as FormArray;
+  get items(): FormArray {
+    return this.invoiceForm.get('items') as FormArray;
   }
-
-   // Create a single sale item group
-   createSaleItem(): FormGroup {
+  createItem(): FormGroup {
     return this.fb.group({
-      product: ['', Validators.required],
+      itemName: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],
-      price: [{ value: 50000, disabled: true }],
-      discount: [0],
-      discountType: ['$', Validators.required],  // Could be '%' or '$'
-      amount: [{ value: 0, disabled: true }],
-      taxPercentage: [{ value: 5, disabled: true }],
-      tax: [{ value: 0, disabled: true }],
+      price: [0, [Validators.required, Validators.min(0)]],
     });
   }
-
-   // Add a new row to the form array
-   addSaleItem(): void {
-    this.sales.push(this.createSaleItem());
+  addItem() {
+    this.items.push(this.createItem());
   }
 
-  // Remove a row from the form array
-  removeSaleItem(index: number): void {
-    if (this.sales.length > 1) {
-      this.sales.removeAt(index);
+  removeItem(index: number) {
+    this.items.removeAt(index);
+  }
+  getTotal(): number {
+    return this.items.controls.reduce(
+      (sum, item) => sum + item.value.quantity * item.value.price,
+      0
+    );
+  }
+  onSubmit() {
+    if (this.invoiceForm.valid) {
+      console.log(this.invoiceForm.value);
     }
   }
 
-  // Optional: You can create a method to calculate the total
-  calculateTotal(index: number): void {
-    const saleItem = this.sales.at(index);
-    const quantity = saleItem.get('quantity')?.value;
-    const price = 50000; // Example price
-    const discount = saleItem.get('discount')?.value;
-    const discountType = saleItem.get('discountType')?.value;
 
-    let amount = quantity * price;
-    
-    // Calculate discount based on type
-    if (discountType === '$') {
-      amount -= discount;
-    } else if (discountType === '%') {
-      amount -= (amount * discount) / 100;
-    }
+  // 
 
-    const taxPercentage = 5; // Example tax percentage
-    const tax = (amount * taxPercentage) / 100;
+  ngOnInit() {
+    this.productService.getAllItems().subscribe((result: any) => {
+      this.productList = result.data;
+    })
 
-    // Set the calculated amount and tax
-    saleItem.get('amount')?.setValue(amount);
-    saleItem.get('tax')?.setValue(tax);
+    this.customerService.getAllItems().subscribe((result: any) => {
+      this.customerList = result.data
+    })
   }
 
-    ngOnInit() {
-      this.productService.getAllItems().subscribe((result:any)=>{
-        this.productList = result.data;
-      })
-
-      this.customerService.getAllItems().subscribe((result:any)=>{
-        this.customerList = result.data
-      })
-
-
-    }
 }
