@@ -18,9 +18,9 @@ export class SalesService {
     return this.http.get<Sales[]>(`${this.apiUrl}/sales`);
   }
 
-  // createCustomer(customerData: Customers): Observable<Customers> {
-  //   return this.http.post<Customers>(`${this.apiUrl}/sales`, customerData);
-  // }
+  createSales(productData: Sales):Observable<Sales>{
+    return this.http.post<Sales>(`${this.apiUrl}/sales`, productData)
+  }
 
   getTotalSales(): Observable<{totalSales: number}>{
     return this.http.get<{totalSales:number}>(`${this.apiUrl}/sales/total`)

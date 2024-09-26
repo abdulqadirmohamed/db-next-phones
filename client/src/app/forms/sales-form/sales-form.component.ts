@@ -7,6 +7,9 @@ import { Customers } from '../../model/customers';
 import { CustomersService } from '../../services/customers/customers.service';
 import { CalendarModule } from 'primeng/calendar';
 import { CommonModule } from '@angular/common';
+import { SalesService } from '../../services/sales/sales.service';
+import { Sales } from '../../model/sales';
+
 
 
 @Component({
@@ -18,7 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SalesFormComponent implements OnInit {
   invoiceForm!: FormGroup;
-  
+
   productList: Product[] = []
   selectedProduct: string | undefined;
   customerList: Customers[] = []
@@ -28,11 +31,12 @@ export class SalesFormComponent implements OnInit {
 
   productService = inject(ProductService)
   customerService = inject(CustomersService)
+  salesService = inject(SalesService)
 
   constructor(private fb: FormBuilder) {
     this.invoiceForm = this.fb.group({
-      customerName: ['', Validators.required],
-      invoiceDate: ['', Validators.required],
+      customer_id: ['', Validators.required],
+      sale_date: ['', Validators.required],
       items: this.fb.array([this.createItem()]),
     });
   }
@@ -41,11 +45,11 @@ export class SalesFormComponent implements OnInit {
   }
   createItem(): FormGroup {
     return this.fb.group({
-      itemName: ['', Validators.required],
+      product_id: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],
-      price: [0, [Validators.required, Validators.min(0)]],
-      discount: [0, [Validators.min(0)]],
-      amount: [0, [Validators.required, Validators.min(0)]],
+      total_amount: [0, [Validators.required, Validators.min(0)]],
+      // discount: [0, [Validators.min(0)]],
+      // amount: [0, [Validators.required, Validators.min(0)]],
     });
   }
   addItem() {
@@ -57,15 +61,59 @@ export class SalesFormComponent implements OnInit {
   }
   getTotal(): number {
     return this.items.controls.reduce(
-      (sum, item) => sum + item.value.quantity * item.value.price,
+      (sum, item) => sum + item.value.quantity * item.value.total_amount,
+
+      // (sum, item) => {
+      //   const itemTotal = item.value.quantity * (item.value.price - item.value.discount)
+      //   return sum + itemTotal
+      // },
       0
     );
   }
+
   onSubmit() {
     if (this.invoiceForm.valid) {
-      console.log(this.invoiceForm.value);
+      const salesData = {
+        customer_id: this.invoiceForm.value.customer_id,
+        sale_date: new Date().toISOString(), // You can also allow the user to select this
+        items: this.items.value // Getting the items from the form
+      };
+
+      this.salesService.createSales(salesData).subscribe({
+        next: (response) => {
+          console.log('Sale created:', response);
+          alert('Sale successfully recorded');
+        }, error: (err) => {
+          console.error('Error creating sale:', err);
+          alert('Failed to record sale');
+        }
+      });
     }
   }
+
+  // (response: any) => {
+  //   console.log('Sale created:', response);
+  //   alert('Sale successfully recorded');
+  // },
+  // (error) => {
+  //   console.error('Error creating sale:', error);
+  //   alert('Failed to record sale');
+  // }
+
+  // onSubmit() {
+  //   if (this.invoiceForm.valid) {
+  //     const totalAmount = this.getTotal();
+  //     this.invoiceForm.patchValue({total_amount: totalAmount})
+
+  //     this.salesService.createSales(this.invoiceForm.value).subscribe((response: any)=>{
+  //       console.log('Sale created:', response);
+  //         alert('Sale successfully recorded');
+  //     }, (error) => {
+  //       console.error('Error creating sale:', error);
+  //       alert('Failed to record sale');
+  //     })
+  //   }
+  // }
 
 
   // 
