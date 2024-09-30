@@ -43,22 +43,52 @@ const salesController = {
       });
     }
   },
+
+  // create: async (req, res) => {
+  //   try {
+  //     const { customer_id, product_id, quantity, total_amount } = req.body;
+  //     const sql =
+  //       "INSERT INTO sales(customer_id , product_id , quantity, total_amount) VALUES(?,?,?,?)";
+  //     const [rows] = await pool.query(sql, [
+  //       customer_id,
+  //       product_id,
+  //       quantity,
+  //       total_amount,
+  //     ]);
+  //     res.json({ data: rows });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
+
   create: async (req, res) => {
     try {
-      const { customer_id, product_id, quantity, total_amount } = req.body;
-      const sql =
-        "INSERT INTO sales(customer_id , product_id , quantity, total_amount) VALUES(?,?,?,?)";
-      const [rows] = await pool.query(sql, [
-        customer_id,
-        product_id,
-        quantity,
-        total_amount,
-      ]);
-      res.json({ data: rows });
+      const { customer_id, sale_date, items } = req.body
+
+      // Insert into the sales table (without products yet)
+      const salesSql = "INSERT INTO sales (customer_id, sale_date) VALUES(?, ?)";
+      const [salesResult] = await pool.query(salesSql, [customer_id, sale_date]);
+
+      // Get the inserted sale ID
+      const saleId = salesResult.insertId;
+
+      // Insert each item into the sales_items table or directly into the sales table
+      const salesItemsSql = "INSERT INTO sales_items (sale_id, product_id, quantity, total_amount) VALUES (?, ?, ?, ?)";
+
+      for (const item of items) {
+        await pool.query(salesItemsSql, [saleId, item.product_id, item.quantity, item.total_amount])
+      }
+
+      // Respond with success
+      res.json({ message: 'Sale created successfully', saleId });
+
     } catch (error) {
+
       console.log(error);
+      res.status(500).json({ message: 'Error creating sale', error });
     }
   },
+
   update: async (req, res) => {
     try {
       const { customer_id, product_id, quantity, total_amount } = req.body;
