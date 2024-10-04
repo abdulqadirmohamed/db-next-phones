@@ -65,4 +65,10 @@ export class SidebarComponent implements OnInit{
     this.changeIsLeftSidebarCollapsed.emit(!this.isLeftSidebarCollapsed());
   }
 
+  logout() {
+    this.authService.logout().subscribe(() => {
+      window.location.reload()
+    });
+  }
+
 }

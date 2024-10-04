@@ -8,17 +8,21 @@ import { ProductService } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, IncomeExpenseChartComponent, CalendarModule, FormsModule],
+  imports: [CommonModule, RouterLink, LucideAngularModule, IncomeExpenseChartComponent, CalendarModule, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
 
   usersList:any[] = []
+  latestSales:any[] = [];
+  allSales:any[] = [];
+  productList:any[] = [];
 
   date: Date[] | undefined;
 
@@ -63,9 +67,9 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.authService.getAllUsers().subscribe((res:any)=> {
-      this.usersList = res.result
-    })
+    // this.authService.getAllUsers().subscribe((res:any)=> {
+    //   this.usersList = res.result
+    // })
 
     this.productServices.getTotalProducts().subscribe(data => {
       this.totalProducts = data.totalProducts;
@@ -86,6 +90,15 @@ export class DashboardComponent implements OnInit{
       this.totalTodaySales = data.total_sales_today;
       this.items[0].total = this.totalTodaySales; // Update totalTodaySales directly in items
 
+    })
+
+    this.salesServices.getAllISales().subscribe((res:any) =>{
+      this.latestSales = res.data.slice(-5)
+      this.allSales = res.data;
+    })
+
+    this.productServices.getAllItems().subscribe((result:any)=>{
+      this.productList = result.data.slice(-5)
     })
   }
 

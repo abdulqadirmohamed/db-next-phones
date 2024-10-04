@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { LucideAngularModule, Menu  } from 'lucide-angular';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -24,13 +24,21 @@ export class HeaderComponent implements OnInit {
 
 
 
-  constructor(private authService: AuthService) { }
-
+  // constructor(private authService: AuthService) { }
+  authService = inject(AuthService);
 
   ngOnInit(): void {
-    // Subscribe to username changes
-    this.authService.currentUsername.subscribe((name) => {
-      this.username = name;
+    this.authService.user$.subscribe((user: { email: any; displayName: any; }) => {
+      if (user) {
+        this.authService.currentUserSignal.set({
+          email: user.email,
+          username: user.displayName,
+        });
+        console.log(user.displayName)
+        console.log(this.authService.currentUserSignal())
+      } else {
+        this.authService.currentUserSignal.set(null);
+      }
     });
 
    //Notification
@@ -48,9 +56,13 @@ export class HeaderComponent implements OnInit {
             }
         ]
     }
-]; 
+ ]; 
   }
 
-
+  logout() {
+    this.authService.logout().subscribe(() => {
+      window.location.reload()
+    });
+  }
 
 }

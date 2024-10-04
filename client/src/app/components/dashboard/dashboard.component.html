@@ -35,35 +35,27 @@
     </div>
     <div class="grid lg:grid-cols-3 gap-6 my-4">
         <div class="bg-white p-8">
-            <div class="flex justify-between items-center">
-                <h1 class="mb-4">Recent Orders</h1>
-                <a href="#" class="text-[13px] text-blue-700 hover:underline">View all (130)</a>
-            </div>
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="">Recent Sales</h1>
+            <a routerLink="/sales" class="text-[13px] text-blue-700 hover:underline">View all ({{allSales.length}})</a>
+        </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full border border-gray-200 rounded-md text-left text-sm">
                   <thead>
                     <tr class="">
-                      <th class="py-2 px-4 border-b">Tracking No.</th>
+                      <th class="py-2 px-4 border-b">No.</th>
                       <th class="py-2 px-4 border-b">Product Name</th>
                       <th class="py-2 px-4 border-b">Total Amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="py-2 px-4 border-b">13256498</td>
-                      <td class="py-2 px-4 border-b">Keyboard</td>
-                      <td class="py-2 px-4 border-b">$24</td>
-                    </tr>
-                    <tr class="bg-gray-50">
-                      <td class="py-2 px-4 border-b">13256498</td>
-                      <td class="py-2 px-4 border-b">Computer Accessories</td>
-                      <td class="py-2 px-4 border-b">$33</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-4 border-b">13256498</td>
-                      <td class="py-2 px-4 border-b">Mobile</td>
-                      <td class="py-2 px-4 border-b">$200</td>
-                    </tr>
+                    @for (sale of latestSales; track $index) {
+                      <tr>
+                        <td class="py-2 px-4 border-b">{{sale.sale_id}}</td>
+                        <td class="py-2 px-4 border-b">{{sale.product_name}}</td>
+                        <td class="py-2 px-4 border-b">${{sale.total_amount}}</td>
+                      </tr>
+                    }
                   </tbody>
                 </table>
             </div>
@@ -76,27 +68,19 @@
                 <table class="min-w-full border border-gray-200 rounded-md text-left text-sm">
                   <thead>
                     <tr class="">
-                      <th class="py-2 px-4 border-b">Tracking No.</th>
+                      <th class="py-2 px-4 border-b">No.</th>
                       <th class="py-2 px-4 border-b">Product Name</th>
                       <th class="py-2 px-4 border-b">QTY</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="py-2 px-4 border-b">13256498</td>
-                      <td class="py-2 px-4 border-b">Keyboard</td>
-                      <td class="py-2 px-4 border-b">5</td>
-                    </tr>
-                    <tr class="bg-gray-50">
-                      <td class="py-2 px-4 border-b">13256498</td>
-                      <td class="py-2 px-4 border-b">Computer Accessories</td>
-                      <td class="py-2 px-4 border-b">2</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-4 border-b">13256498</td>
-                      <td class="py-2 px-4 border-b">Mobile</td>
-                      <td class="py-2 px-4 border-b">4</td>
-                    </tr>
+                    @for (product of productList; track $index) {
+                      <tr>
+                        <td class="py-2 px-4 border-b">{{product.id}}</td>
+                        <td class="py-2 px-4 border-b">{{product.name}}</td>
+                        <td class="py-2 px-4 border-b">{{product.stock_quantity}}</td>
+                      </tr>
+                   }
                   </tbody>
                 </table>
             </div>

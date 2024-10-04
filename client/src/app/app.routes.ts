@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
+
 
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
@@ -11,13 +11,14 @@ import { authGuard } from './guard/auth.guard';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { SalesFormComponent } from './forms/sales-form/sales-form.component';
+import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
     {
-        path: 'login',
+        path: 'auth',
         component: AuthLayoutComponent,
         children: [
-          { path: '', component: LoginComponent }
+          { path: 'login', component: LoginComponent }
         ]
       },
       {

@@ -13,10 +13,12 @@
         </div>
         <div class="flex items-center gap-2">
             <img width="30" src="https://avatars.githubusercontent.com/u/63993502?v=4" alt="" class="rounded-full">
+           @if (authService.currentUserSignal !== null) {
             <div class="font-medium capitalize leading-5">
-                <p class="text-gray-900"> {{username}}</p>
-                <p class="text-[12px]">{{email}}</p>
+                <p class="text-gray-900">{{authService.currentUserSignal()?.username}}</p>
+                <p class="text-[12px]">{{authService.currentUserSignal()?.email}}</p>
             </div>
+           }
         </div>
     </div>
 </div>
