@@ -29,4 +29,9 @@ export class SalesService {
     return this.http.get<{total_sales_today:number}>(`${this.apiUrl}/sales/todaysales`)
   }
 
+   // Fetch sales report between two dates
+   getSalesReport(startDate: string, endDate: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/sales/sales-report/?start_date=${startDate}&end_date=${endDate}`);
+  }
+
 }

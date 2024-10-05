@@ -1,3 +1,11 @@
 .sidenav-collapsed {
     width: 5rem;
   }
+
+  /* For mobile devices - less than 768px */
+@media (max-width: 768px) {
+  .sidenav-collapsed {
+      background-color: green;
+  }
+ 
+}
