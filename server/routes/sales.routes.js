@@ -7,6 +7,7 @@ router.get('/', salesController.getAll)
 
 router.get('/total', salesController.totalSales)
 router.get('/todaysales', salesController.totalSalesToday)
+router.get('/sales-report', salesController.getSalesReport)
 
 router.get('/:id', salesController.getSaleById)
 
@@ -14,5 +15,8 @@ router.post('/', salesController.create)
 router.post('/:id', salesController.update)
 
 router.delete('/:id', salesController.destroy)
+
+
+
 
 module.exports = router

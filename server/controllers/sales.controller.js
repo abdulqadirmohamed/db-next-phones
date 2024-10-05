@@ -62,7 +62,7 @@ const salesController = {
 
       // Insert each item into the sales_items table or directly into the sales table
       const salesItemsSql =
-        "INSERT INTO sales_items (sale_id, product_id, quantity, total_amount) VALUES (?, ?, ?, ?)";
+        "INSERT INTO sales_items (sale_id, product_id, quantity, discount, total_amount) VALUES (?, ?, ?, ?, ?)";
 
       for (const item of items) {
         const { product_id, quantity, total_amount } = item;
@@ -82,10 +82,10 @@ const salesController = {
     WHERE id = ?
   `;
 
-  await pool.query(updateSalesQuery, [totalSaleAmount, saleId])
+      await pool.query(updateSalesQuery, [totalSaleAmount, saleId])
 
       // Respond with success
-  
+
       res.json({ message: 'Sale created successfully', sale_id: saleId, total_amount: totalSaleAmount });
     } catch (error) {
       console.log(error);
@@ -162,6 +162,40 @@ const salesController = {
         status: "error",
         message: "Database query failed",
       });
+    }
+  },
+
+  // Reports
+  getSalesReport: async (req, res) => {
+    try {
+      const { start_date, end_date } = req.query;
+      const sql =
+        ` SELECT 
+        s.id AS sale_id, 
+        s.sale_date, 
+        c.name AS customer_name, 
+        p.name AS product_name, 
+        si.quantity, 
+        si.total_amount
+      FROM 
+        sales s
+      JOIN 
+        customers c ON s.customer_id = c.id
+      JOIN 
+        sales_items si ON s.id = si.sale_id
+      JOIN 
+        products p ON si.product_id = p.id
+      WHERE 
+        s.sale_date BETWEEN ? AND ?
+      ORDER BY 
+        s.sale_date DESC
+    `;
+
+      const [rows] = await pool.query(sql, [start_date, end_date]);
+      res.json({ data: rows });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Error generating sales report' });
     }
   },
 };
