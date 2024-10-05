@@ -26,6 +26,9 @@ export class DashboardComponent implements OnInit{
 
   date: Date[] | undefined;
 
+  isloading:boolean = true;
+  loadingTableLenght = 5;
+
   totalTodaySales: number = 0;
   totalSales: number = 0;
   totalProducts: number = 0
@@ -67,10 +70,6 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
 
-    // this.authService.getAllUsers().subscribe((res:any)=> {
-    //   this.usersList = res.result
-    // })
-
     this.productServices.getTotalProducts().subscribe(data => {
       this.totalProducts = data.totalProducts;
       this.items[3].total = this.totalProducts
@@ -89,6 +88,7 @@ export class DashboardComponent implements OnInit{
     this.salesServices.getTodaySales().subscribe(data => {
       this.totalTodaySales = data.total_sales_today;
       this.items[0].total = this.totalTodaySales; // Update totalTodaySales directly in items
+      this.isloading = false
 
     })
 

@@ -1,106 +1,141 @@
 <div>
-    <h1 class="mb-6">Dashboard</h1>
-    <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
-        <!-- Col 1 -->
-        @for (item of items; track $index) {
-        <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 md:px-4 rounded">
-            <div class="flex gap-4 items-center">
-                <div [ngClass]="item.icon" class="rounded-full w-12 h-12 p-1 flex items-center justify-center">
-                    <lucide-icon [name]="item.icon"></lucide-icon>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500">{{item.label}}</p>
-                    <h3 class="font-medium text-lg">
-                      {{item.isMoney? '$':''}}
-                      {{item.total}}
-                    </h3>
-                </div>
-            </div>
-            <div>
-                <div class="flex md:hidden items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
-                    <span class="text-sm">3.47%</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-arrow-up">
-                        <path d="m5 12 7-7 7 7" />
-                        <path d="M12 19V5" />
-                    </svg>
-                </div>
-            </div>
+  <h1 class="mb-6">Dashboard</h1>
+  <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+    <!-- Col 1 -->
+    @for (item of items; track $index) {
+    <div class="flex justify-between items-center gap-2 bg-white py-6 px-8 md:px-4 rounded">
+      <div class="flex gap-4 items-center">
+        <div [ngClass]="item.icon" class="rounded-full w-12 h-12 p-1 flex items-center justify-center">
+          <lucide-icon [name]="item.icon"></lucide-icon>
         </div>
+        <div>
+          <p class="text-sm text-gray-500">{{item.label}}</p>
+          <h3 class="font-medium text-lg">
+            @if (isloading == true) {
+            <div role="status" class="max-w-sm animate-pulse my-2">
+              <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-300 w-48 mb-4"></div>
+              <span class="sr-only">Loading...</span>
+            </div>
+            }@else {
+            {{item.isMoney? '$':''}}
+            {{item.total}}
+            }
+          </h3>
+        </div>
+      </div>
+      <div>
+        <div class="flex md:hidden items-center gap-1 bg-[#E6F4FF] text-blue-700 rounded px-2">
+          <span class="text-sm">3.47%</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-arrow-up">
+            <path d="m5 12 7-7 7 7" />
+            <path d="M12 19V5" />
+          </svg>
+        </div>
+      </div>
+    </div>
     }
-        
-              
 
-    </div>
-    <div class="grid lg:grid-cols-3 gap-6 my-4">
-        <div class="bg-white p-8">
-          <div class="flex justify-between items-center mb-4">
-            <h1 class="">Recent Sales</h1>
-            <a routerLink="/sales" class="text-[13px] text-blue-700 hover:underline">View all ({{allSales.length}})</a>
-        </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-200 rounded-md text-left text-sm">
-                  <thead>
-                    <tr class="">
-                      <th class="py-2 px-4 border-b">No.</th>
-                      <th class="py-2 px-4 border-b">Product Name</th>
-                      <th class="py-2 px-4 border-b">Total Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @for (sale of latestSales; track $index) {
-                      <tr>
-                        <td class="py-2 px-4 border-b">{{sale.sale_id}}</td>
-                        <td class="py-2 px-4 border-b">{{sale.product_name}}</td>
-                        <td class="py-2 px-4 border-b">${{sale.total_amount}}</td>
-                      </tr>
-                    }
-                  </tbody>
-                </table>
-            </div>
-          </div>
-        <div class="bg-white p-8">
-            <div class="flex justify-between items-center">
-                <h1 class="mb-4">Product stock alert</h1>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-200 rounded-md text-left text-sm">
-                  <thead>
-                    <tr class="">
-                      <th class="py-2 px-4 border-b">No.</th>
-                      <th class="py-2 px-4 border-b">Product Name</th>
-                      <th class="py-2 px-4 border-b">QTY</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @for (product of productList; track $index) {
-                      <tr>
-                        <td class="py-2 px-4 border-b">{{product.id}}</td>
-                        <td class="py-2 px-4 border-b">{{product.name}}</td>
-                        <td class="py-2 px-4 border-b">{{product.stock_quantity}}</td>
-                      </tr>
-                   }
-                  </tbody>
-                </table>
-            </div>
-          </div>
-          <!-- Calendeer -->
-          <div class="card flex justify-content-center">
-            <p-calendar 
-                class="max-w-full" 
-                [(ngModel)]="date" 
-                [inline]="true" 
-                [showWeek]="true" />
-        </div>
-    </div>
 
-    <div class="grid md:grid-cols-3 gap-6 my-4">
-        <div class="bg-white p-8 flex flex-col items-center justify-center">
-            <h1 class="text-center my-2">Income VS Expense</h1>
-            <div class="my-3">
-                <app-income-expense-chart/>
-            </div>
-        </div>
+
+  </div>
+  <div class="grid lg:grid-cols-3 gap-6 my-4">
+    <div class="bg-white p-8">
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="">Recent Sales</h1>
+        <a routerLink="/sales" class="text-[13px] text-blue-700 hover:underline">View all ({{allSales.length}})</a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-200 rounded-md text-left text-sm">
+          <thead>
+            <tr class="">
+              <th class="py-2 px-4 border-b">No.</th>
+              <th class="py-2 px-4 border-b">Product Name</th>
+              <th class="py-2 px-4 border-b">Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (isloading) {
+            @for (loadingTableLenght of items; track $index) {
+            <tr class="animate-pulse">
+              <td>
+                <div class="h-2 bg-gray-300 rounded my-2 mx-4"></div>
+              </td>
+              <td>
+                <div class="h-2 bg-gray-300 rounded my-2 mx-4"></div>
+              </td>
+              <td>
+                <div class="h-2 bg-gray-300 rounded my-2 mx-4"></div>
+              </td>
+            </tr>
+            }
+            }@else {
+            @for (sale of latestSales; track $index) {
+            <tr>
+              <td class="py-2 px-4 border-b">{{sale.sale_id}}</td>
+              <td class="py-2 px-4 border-b">{{sale.product_name}}</td>
+              <td class="py-2 px-4 border-b">${{sale.total_amount}}</td>
+            </tr>
+            }
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
+    <div class="bg-white p-8">
+      <div class="flex justify-between items-center">
+        <h1 class="mb-4">Product stock alert</h1>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-200 rounded-md text-left text-sm">
+          <thead>
+            <tr class="">
+              <th class="py-2 px-4 border-b">No.</th>
+              <th class="py-2 px-4 border-b">Product Name</th>
+              <th class="py-2 px-4 border-b">QTY</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (isloading) {
+            @for (loadingTableLenght of items; track $index) {
+            <tr class="animate-pulse">
+              <td>
+                <div class="h-2 bg-gray-300 rounded my-2 mx-4"></div>
+              </td>
+              <td>
+                <div class="h-2 bg-gray-300 rounded my-2 mx-4"></div>
+              </td>
+              <td>
+                <div class="h-2 bg-gray-300 rounded my-2 mx-4"></div>
+              </td>
+            </tr>
+            }
+            }@else {
+            @for (product of productList; track $index) {
+            <tr>
+              <td class="py-2 px-4 border-b">{{product.id}}</td>
+              <td class="py-2 px-4 border-b">{{product.name}}</td>
+              <td class="py-2 px-4 border-b">${{product.stock_quantity}}</td>
+            </tr>
+            }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Calendeer -->
+    <div class="card flex justify-content-center">
+      <p-calendar class="max-w-full" [(ngModel)]="date" [inline]="true" [showWeek]="true" />
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 my-4">
+    <div class="bg-white p-8 flex flex-col items-center justify-center">
+      <h1 class="text-center my-2">Income VS Expense</h1>
+      <div class="my-3">
+        <app-income-expense-chart />
+      </div>
+    </div>
+  </div>
 </div>
