@@ -44,54 +44,60 @@ const salesController = {
     }
   },
 
-  create: async (req, res) => {
-    try {
-      const { customer_id, sale_date, items } = req.body;
 
-      // Insert into the sales table (without products yet)
-      const salesSql = `
+create: async (req, res) => {
+  const connection = await pool.getConnection();
+  try {
+    const { customer_id, items } = req.body;
+    
+    // Begin transaction
+    await connection.beginTransaction();
+
+    // Insert into sales table (without total_amount for now)
+    const saleQuery = `
       INSERT INTO sales (customer_id, sale_date, total_amount)
       VALUES (?, NOW(), ?)
     `;
-      const [salesResult] = await pool.query(salesSql, [customer_id, 0]);
+    const [saleResult] = await connection.query(saleQuery, [customer_id, 0]); // Set total_amount to 0 for now
 
-      // Get the inserted sale ID
-      const saleId = salesResult.insertId;
+    const saleId = saleResult.insertId;
 
-      let totalSaleAmount = 0;
+    let totalSaleAmount = 0;
 
-      // Insert each item into the sales_items table or directly into the sales table
-      const salesItemsSql =
-        "INSERT INTO sales_items (sale_id, product_id, quantity, discount, total_amount) VALUES (?, ?, ?, ?, ?)";
+    // Insert into sales_items table and calculate total amount for the sale
+    const salesItemsQuery = `
+      INSERT INTO sales_items (sale_id, product_id, quantity, total_amount)
+      VALUES (?, ?, ?, ?)
+    `;
 
-      for (const item of items) {
-        const { product_id, quantity, total_amount } = item;
-        totalSaleAmount += total_amount;
-        await pool.query(salesItemsSql, [
-          saleId,
-          product_id,
-          quantity,
-          total_amount,
-        ]);
-      }
+    for (const item of items) {
+      const { product_id, quantity, total_amount } = item;
+      totalSaleAmount += total_amount;
 
-      // Update sales table with the correct total_amount
-      const updateSalesQuery = `
-    UPDATE sales
-    SET total_amount = ?
-    WHERE id = ?
-  `;
-
-      await pool.query(updateSalesQuery, [totalSaleAmount, saleId])
-
-      // Respond with success
-
-      res.json({ message: 'Sale created successfully', sale_id: saleId, total_amount: totalSaleAmount });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Error creating sale", error });
+      // Insert each item into sales_items
+      await connection.query(salesItemsQuery, [saleId, product_id, quantity, total_amount]);
     }
-  },
+
+    // Update sales table with the correct total_amount
+    const updateSalesQuery = `
+      UPDATE sales
+      SET total_amount = ?
+      WHERE id = ?
+    `;
+    await connection.query(updateSalesQuery, [totalSaleAmount, saleId]);
+
+    // Commit the transaction
+    await connection.commit();
+
+    res.json({ message: 'Sale created successfully', sale_id: saleId, total_amount: totalSaleAmount });
+  } catch (error) {
+    await connection.rollback();
+    console.error(error);
+    res.status(500).send('Error processing sale');
+  } finally {
+    connection.release();
+  }
+},
 
   update: async (req, res) => {
     try {

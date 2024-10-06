@@ -83,6 +83,7 @@ export class SalesFormComponent implements OnInit {
         next: (response) => {
           console.log('Sale created:', response);
           alert('Sale successfully recorded');
+          window.location.reload()
         }, error: (err) => {
           console.error('Error creating sale:', err);
           alert('Failed to record sale');
@@ -91,32 +92,6 @@ export class SalesFormComponent implements OnInit {
     }
   }
 
-  // (response: any) => {
-  //   console.log('Sale created:', response);
-  //   alert('Sale successfully recorded');
-  // },
-  // (error) => {
-  //   console.error('Error creating sale:', error);
-  //   alert('Failed to record sale');
-  // }
-
-  // onSubmit() {
-  //   if (this.invoiceForm.valid) {
-  //     const totalAmount = this.getTotal();
-  //     this.invoiceForm.patchValue({total_amount: totalAmount})
-
-  //     this.salesService.createSales(this.invoiceForm.value).subscribe((response: any)=>{
-  //       console.log('Sale created:', response);
-  //         alert('Sale successfully recorded');
-  //     }, (error) => {
-  //       console.error('Error creating sale:', error);
-  //       alert('Failed to record sale');
-  //     })
-  //   }
-  // }
-
-
-  // 
 
   ngOnInit() {
     this.productService.getAllItems().subscribe((result: any) => {

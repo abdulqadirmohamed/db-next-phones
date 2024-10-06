@@ -29,8 +29,13 @@ import { DatePipe } from '@angular/common';
   styleUrl: './customers.component.css'
 })
 export class CustomersComponent implements OnInit {
+product: any;
+onEdit(arg0: any) {
+throw new Error('Method not implemented.');
+}
 
 
+  selectedCustomer: any = null; // Store the selected customer for editing
   itemList: Customers[] = [];
 
 
@@ -67,4 +72,5 @@ export class CustomersComponent implements OnInit {
   closeCustomerDrawer() {
     this.isCustomerDrawerOpen = false;
   }
+
 }

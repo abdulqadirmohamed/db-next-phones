@@ -1,17 +1,16 @@
-
 <div>
     <p>Customers</p>
     <div class="flex justify-between items-center">
-        <button (click)="openCustomerDrawer()" class="bg-blue-700 text-white px-3 py-2 rounded-md my-4 text-sm flex items-center gap-2">
+        <button (click)="openCustomerDrawer()"
+            class="bg-blue-700 text-white px-3 py-2 rounded-md my-4 text-sm flex items-center gap-2">
             <lucide-icon name="plus"></lucide-icon>
-Create Customer</button>
-
+            Create Customer</button>
 
         <app-drawer [isOpen]="isCustomerDrawerOpen" [title]="'Create Customer'" (onClose)="closeCustomerDrawer()">
-            <app-customer-form/>
+            <app-customer-form />
         </app-drawer>
-        
-        <button  class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
+
+        <button class="bg-green-700 text-white px-3 py-2 rounded-md my-4 text-sm">
             Export to Excel
         </button>
     </div>
@@ -51,14 +50,15 @@ Create Customer</button>
                 <td>{{ customer.address }}</td>
                 <td>{{ customer.created_at | date:'medium' }}</td>
                 <th class="flex items-center text-right">
-                
-                    <button  class="bg-green-700 hover:bg-green-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
-                        <lucide-icon size="20" name="pencil"></lucide-icon> 
-                    </button>
-                    <button
-                    (click)="deleteCustomer(customer.id)"
+
+                    <a
+                    (click)="onEdit(product.id)"
+                        class="bg-green-700 hover:bg-green-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
+                        <lucide-icon size="20" name="pencil"></lucide-icon>
+                    </a>
+                    <button (click)="deleteCustomer(customer.id)"
                         class="bg-red-700 hover:bg-red-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
-                        <lucide-icon size="20"  name="trash-2"></lucide-icon>
+                        <lucide-icon size="20" name="trash-2"></lucide-icon>
                     </button>
                 </th>
             </tr>

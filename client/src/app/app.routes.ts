@@ -12,6 +12,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { ReportsComponent } from './components/reports/reports.component';
 import { SalesFormComponent } from './forms/sales-form/sales-form.component';
 import { LoginComponent } from './auth/login/login.component';
+import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 
 export const routes: Routes = [
     {
@@ -28,6 +29,7 @@ export const routes: Routes = [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'product', component: ProductsComponent },
           { path: 'customer', component: CustomersComponent },
+          { path: 'customer/edit/:id', component: EditCustomerComponent },
           { path: 'sales', component: SalesComponent },
           { path: 'sales/invoice', component: SalesFormComponent },
           { path: 'reports', component: ReportsComponent },

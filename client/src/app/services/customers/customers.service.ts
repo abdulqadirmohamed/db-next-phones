@@ -24,8 +24,12 @@ export class CustomersService {
   getTotalCustomers(): Observable<{totalCustomers: number}>{
     return this.http.get<{totalCustomers:number}>(`${this.apiUrl}/customers/total`)
   }
+// Method to update a product
+updateCustomer(customerId: number, product: Customers): Observable<Customers> {
+  return this.http.put<Customers>(`${this.apiUrl}/customers/${customerId}`, product);
+}
 
   deletCustomer(id: number): Observable<Customers>{
-    return this.http.delete<Customers>(`${this.apiUrl}/products/${id}`)
+    return this.http.delete<Customers>(`${this.apiUrl}/customers/${id}`)
   }
 }
