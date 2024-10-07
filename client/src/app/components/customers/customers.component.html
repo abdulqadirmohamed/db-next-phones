@@ -51,8 +51,7 @@
                 <td>{{ customer.created_at | date:'medium' }}</td>
                 <th class="flex items-center text-right">
 
-                    <a
-                    (click)="onEdit(product.id)"
+                    <a [routerLink]="['/customer/edit/', customer.id]"
                         class="bg-green-700 hover:bg-green-600 flex items-center my-2 gap-2 text-white rounded px-4 py-2 text-sm mx-2">
                         <lucide-icon size="20" name="pencil"></lucide-icon>
                     </a>

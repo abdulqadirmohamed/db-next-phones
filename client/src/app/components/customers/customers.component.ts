@@ -11,28 +11,27 @@ import { Button } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
   imports: [
-    DrawerComponent, 
-    LucideAngularModule, 
+    DrawerComponent,
+    LucideAngularModule,
     CustomerFormComponent,
     TableModule,
     Button,
     IconFieldModule,
     InputIconModule,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
 export class CustomersComponent implements OnInit {
-product: any;
-onEdit(arg0: any) {
-throw new Error('Method not implemented.');
-}
+  product: any;
 
 
   selectedCustomer: any = null; // Store the selected customer for editing
