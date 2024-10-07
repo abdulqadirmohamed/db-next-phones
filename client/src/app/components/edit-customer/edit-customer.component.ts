@@ -25,8 +25,16 @@ export class EditCustomerComponent {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+     // Initialize the form
+     this.customerForm = this.fb.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     // Fetch customer ID from route parameters
@@ -36,13 +44,6 @@ export class EditCustomerComponent {
         // Fetch customer data if ID is available
         this.getCustomerById(this.customerId);
       }
-    });
-
-    // Initialize the form
-    this.customerForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      phone: ['', Validators.required],
     });
   }
   // Fetch customer by ID and populate the form
@@ -75,7 +76,7 @@ export class EditCustomerComponent {
       this.customerServices.updateCustomer(this.customerId,this.customerForm.value).subscribe({
         next: (response) => {
           console.log('Customer created:', response);
-          window.location.reload()
+          this.router.navigateByUrl('/customer')
         },
         error: (err) => {
           console.error('Error creating customer:', err);

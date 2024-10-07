@@ -2,6 +2,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CustomersService } from '../../services/customers/customers.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-form',
@@ -11,13 +12,12 @@ import { CustomersService } from '../../services/customers/customers.service';
   styleUrl: './customer-form.component.css'
 })
 export class CustomerFormComponent implements OnInit {
-  @Input() customer: any; // Receive customer data for editing
   customerForm!: FormGroup;
 
 
   customerServices = inject(CustomersService);
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.customerForm = this.fb.group({
@@ -29,18 +29,15 @@ export class CustomerFormComponent implements OnInit {
 
   onSubmit() {
     if (this.customerForm.valid) {
-      if (this.customer) {
-        this.customerServices.createCustomer(this.customerForm.value).subscribe({
-          next: (response) => {
-            console.log('Customer created:', response);
-            window.location.reload()
-          },
-          error: (err) => {
-            console.error('Error creating customer:', err);
-          }
-        })
-      } 
-    }
-
-  }
+      this.customerServices.createCustomer(this.customerForm.value).subscribe({
+        next: (response)=>{
+          console.log('Customer created:', response);
+          // this.router.navigateByUrl('/customer')
+          window.location.reload()
+        },
+        error: (err)=>{
+          console.log('Error creating customer: ', err)
+        }
+      })
+    }}
 }

@@ -11,7 +11,7 @@ import { Button } from 'primeng/button';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -39,6 +39,9 @@ export class CustomersComponent implements OnInit {
 
 
   customerServices = inject(CustomersService);
+  constructor(
+    private router: Router
+  ){}
 
   ngOnInit(): void {
     this.customerServices.getAllItems().subscribe((result: any) => {

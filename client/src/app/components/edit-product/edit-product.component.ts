@@ -31,24 +31,54 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Capture the product ID from the URL and convert it to a number
-    this.productId = this.route.snapshot.params['id']; // The + converts the string to a number
-    console.log('Product ID:', this.productId); // Debugging check
+    // Fetch customer ID from route parameters
+    this.route.paramMap.subscribe((param) => {
+      this.productId = Number(param.get('id'));
+      if (this.productId) {
+        // Fetch customer data if ID is available
+        this.getProductById(this.productId);
+      }
+    });;
+  }
 
-    // Fetch product data by ID and populate the form
-    this.productService.getProductById(this.productId).subscribe((data) => {
-      console.log('Product data:', data); 
-      this.productForm.patchValue(data);
-      console.log(this.productForm.patchValue(data))
-    });
-  }
-  onSubmit() {
-    if (this.productForm.valid) {
-      this.productService.updateProduct(this.productId, this.productForm.value)
-        .subscribe(() => {
-          this.router.navigate(['/products']); // Redirect to product list after successful update
-        });
+    // Fetch customer by ID and populate the form
+    getProductById(id: number) {
+      this.productService.getProductById(id).subscribe({
+        next: (response: any) => {
+          const product = response.data[0]; // Access the first item in the 'data' array
+          if (product) {
+            this.productForm.patchValue({
+              name: product.name,
+              price: product.price,
+              stock_quantity: product.stock_quantity,
+              category: product.category,
+              description: product.description
+            });
+            console.log(product);
+          } else {
+            console.error('Customer not found');
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching customer data:', err);
+        },complete: () => {
+          console.log('Customer fetch operation completed');
+        }
+      });
     }
-  }
+
+ // Handle form submission
+ onSubmit() {
+  if (this.productForm.valid) {
+    this.productService.updateProduct(this.productId,this.productForm.value).subscribe({
+      next: (response) => {
+        console.log('product updated:', response);
+        this.router.navigateByUrl('/product')
+      },
+      error: (err) => {
+        console.error('Error creating product:', err);
+      }
+    })
+}}
 
 }

@@ -9,6 +9,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CommonModule } from '@angular/common';
 import { SalesService } from '../../services/sales/sales.service';
 import { Sales } from '../../model/sales';
+import { Router } from '@angular/router';
 
 
 
@@ -33,7 +34,7 @@ export class SalesFormComponent implements OnInit {
   customerService = inject(CustomersService)
   salesService = inject(SalesService)
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.invoiceForm = this.fb.group({
       customer_id: ['', Validators.required],
       sale_date: ['', Validators.required],
@@ -83,7 +84,7 @@ export class SalesFormComponent implements OnInit {
         next: (response) => {
           console.log('Sale created:', response);
           alert('Sale successfully recorded');
-          window.location.reload()
+          this.router.navigateByUrl('/sales')
         }, error: (err) => {
           console.error('Error creating sale:', err);
           alert('Failed to record sale');
