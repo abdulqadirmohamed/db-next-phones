@@ -25,9 +25,8 @@ export class CustomersService {
     return this.http.get<{ totalCustomers: number }>(`${this.apiUrl}/customers/total`)
   }
   // Method to update a customer
-  updateCustomer(id: number, customer: Customers): Observable<Customers> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Customers>(`${this.apiUrl}/customers/${id}`, customer, { headers });
+  updateCustomer(id: number, customer:Customers): Observable<Customers> {
+    return this.http.put<Customers>(`${this.apiUrl}/customers/${id}`, customer);
   }
 
   // Method to get a customer by ID

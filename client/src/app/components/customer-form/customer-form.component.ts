@@ -30,17 +30,6 @@ export class CustomerFormComponent implements OnInit {
   onSubmit() {
     if (this.customerForm.valid) {
       if (this.customer) {
-        // Update existing customer
-        this.customerServices.updateCustomer(this.customer.id, this.customerForm.value).subscribe({
-          next: (response) => {
-            console.log('Customer updated:', response);
-            window.location.reload();
-          },
-          error: (err) => {
-            console.error('Error updating customer:', err);
-          }
-        });
-      } else {
         this.customerServices.createCustomer(this.customerForm.value).subscribe({
           next: (response) => {
             console.log('Customer created:', response);
@@ -50,7 +39,7 @@ export class CustomerFormComponent implements OnInit {
             console.error('Error creating customer:', err);
           }
         })
-      }
+      } 
     }
 
   }
