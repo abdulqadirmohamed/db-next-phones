@@ -7,8 +7,9 @@ import {
   updateProfile,
   user,
 } from '@angular/fire/auth';
-import { from, Observable, single } from 'rxjs';
+import { catchError, from, Observable, single, throwError } from 'rxjs';
 import { UserInterface } from '../../types/user.interface';
+import { fetchSignInMethodsForEmail } from '@firebase/auth';
 
 
 @Injectable({
@@ -57,5 +58,5 @@ export class AuthService {
       });
     return from(promise);
   }
-  
+
 }

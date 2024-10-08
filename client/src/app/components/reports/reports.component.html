@@ -3,7 +3,7 @@
     <div class="grid md:grid-cols-3 gap-4">
         <div class="">
             <label for="countries" class="block mb-2 text-sm font-medium text-gray-600 w-full">Customer Name</label>
-            <select id="customerSelect" [(ngModel)]="selectedCustomer"
+            <select id="customerSelect" [(ngModel)]="selectedCustomer" [style]="{'width':'100%'}"
                 class="h-12 border capitalize border-gray-300 text-gray-600 text-base rounded-lg py-2.5 px-4 focus:outline-none">
                 <option selected disabled>Choose a customer</option>
                 <option *ngFor="let customer of itemList" [value]="customer.id" class="capitalize">{{ customer.name }}

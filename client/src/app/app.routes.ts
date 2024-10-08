@@ -13,13 +13,15 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { SalesFormComponent } from './forms/sales-form/sales-form.component';
 import { LoginComponent } from './auth/login/login.component';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 
 export const routes: Routes = [
     {
         path: 'auth',
         component: AuthLayoutComponent,
         children: [
-          { path: 'login', component: LoginComponent }
+          { path: 'login', component: LoginComponent },
+          { path: 'password_reset', component: PasswordResetComponent }
         ]
       },
       {

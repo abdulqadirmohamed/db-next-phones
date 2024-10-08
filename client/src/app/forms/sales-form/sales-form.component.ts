@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 })
 export class SalesFormComponent implements OnInit {
   invoiceForm!: FormGroup;
+  date: Date | undefined;
 
   productList: Product[] = []
   selectedProduct: string | undefined;
