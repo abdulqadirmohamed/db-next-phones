@@ -1,12 +1,12 @@
-<div class="h-screen bg-gradient-to-t flex justify-center items-center">
-  <div class="w-2/5 mx-auto h-[500px] bg-white  grid grid-cols-2 items-center justify-center">
-    <div class="h-full w-full bg-red-400">
+<div class="h-screen  flex justify-center items-center">
+  <div class="w-full lg:w-2/4 md:w-4/5 mx-auto h-[500px] md:px-0 px-14 grid grid-cols-2 items-center justify-center">
+    <div class="h-full w-full md:flex hidden">
       <img
       class="w-full h-full object-cover"
        src="https://plus.unsplash.com/premium_photo-1661963212517-830bbb7d76fc?q=80&w=1986&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white  rounded px-8 pt-6 pb-8 mb-4 w-full max-w-xs">
-      <div class="mb-6">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full h-full bg-white rounded px-8 pt-6 pb-8 md:col-span-1 col-span-2">
+      <div class="mb-14">
         <h1 class="text-blue-700 text-2xl font-bold">Welcome back!</h1>
         <p>Please sign in to continue</p>
       </div>
@@ -41,5 +41,6 @@
         </a>
       </div>
     </form>
+    </div>
+  
   </div>
-</div>
